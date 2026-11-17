@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ministro da Economia do Brasil</title>
+<style>
+:root{--bg:#eef1f4;--card:#fff;--tx:#12171f;--mut:#667085;--ac:#0b7a3b;--ac2:#f2c200;--bad:#c0392b;--bd:#dde2e8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1117;--card:#171d26;--tx:#eef1f5;--mut:#9aa4b2;--ac:#3ddc84;--ac2:#ffd84a;--bad:#ff6b5b;--bd:#283240}}
+:root[data-theme="dark"]{--bg:#0d1117;--card:#171d26;--tx:#eef1f5;--mut:#9aa4b2;--ac:#3ddc84;--ac2:#ffd84a;--bad:#ff6b5b;--bd:#283240}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(135deg,#0b7a3b,#0a5c2e);color:#fff;padding:14px 14px 12px}
+header h1{margin:0;font-size:19px}header div{font-size:12px;opacity:.85}
+main{max-width:600px;margin:0 auto;padding:10px 10px 96px}
+h2{font-size:12px;margin:0 0 8px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin:10px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.k{border:1px solid var(--bd);border-radius:10px;padding:8px}.k b{display:block;font-size:19px}.k span{font-size:11px;color:var(--mut)}
+.bad{color:var(--bad)}.ok{color:var(--ac)}.mut{color:var(--mut);font-size:12px}
+label{display:flex;justify-content:space-between;font-size:14px;margin-top:10px}
+input[type=range]{width:100%;accent-color:var(--ac)}
+button{font:inherit;border:0;border-radius:10px;padding:12px;background:var(--ac);color:#fff;font-weight:700}
+:root:not([data-theme="light"]) button.p{color:#06210f}
+button.s{background:var(--bd);color:var(--tx);font-weight:600}
+button.sel{outline:3px solid var(--ac2)}
+#go{width:100%;font-size:16px;margin-top:10px;background:var(--ac2);color:#2a2200}
+.pj{display:flex;gap:8px;align-items:center;border-top:1px solid var(--bd);padding:8px 0}.pj div{flex:1;font-size:13px}
+textarea{width:100%;box-sizing:border-box;min-height:90px;border:1px solid var(--bd);border-radius:10px;padding:10px;font:inherit;background:var(--bg);color:var(--tx)}
+.row{display:flex;gap:8px;margin-top:8px}.row button{flex:1}
+.msg{padding:8px 10px;border-radius:10px;margin:6px 0;font-size:14px;background:var(--bg)}.me{background:var(--ac);color:#fff}
+.tag{display:inline-block;font-size:10px;font-weight:700;background:var(--ac2);color:#2a2200;border-radius:6px;padding:1px 6px;margin-right:6px}
+.nw{padding:8px 0;border-top:1px solid var(--bd);font-size:14px}.hd{font-size:11px;color:var(--mut);margin-top:12px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;background:none;color:var(--mut);border-radius:0;padding:12px 4px;font-size:12px}nav button.on{color:var(--ac);border-top:3px solid var(--ac)}
+.wrap{overflow-x:auto}svg{width:100%;height:auto}.tab{display:none}.tab.on{display:block}
+body{background:radial-gradient(1000px 380px at 50% -120px,rgba(11,122,59,.22),transparent),var(--bg)}
+.card{box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06)}
+#rib{display:flex;gap:6px;margin-top:8px;overflow-x:auto}#rib span{background:rgba(255,255,255,.18);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+#toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:12px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;max-width:88%;z-index:9}#toast.on{opacity:1}
+.ix{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.ix svg{background:var(--bg);border-radius:8px}
+.bar{height:6px;border-radius:4px;background:var(--bd);overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:var(--ac)}
+nav button.on{background:rgba(11,122,59,.12)}.pj button small{font-weight:400;opacity:.8}
+#pl{position:fixed;inset:0;z-index:50;background:radial-gradient(900px 500px at 50% 0,#1a2b4a,#070b14);color:#fff;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 14px) 12px calc(env(safe-area-inset-bottom,0px) + 14px);overflow:auto;box-sizing:border-box}
+#pl[hidden]{display:none}#pl h3{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;color:#fff}
+#pl h2{margin:4px 0 6px;font-size:19px;text-align:center;color:#fff;text-transform:none;letter-spacing:0}
+#pl svg{width:100%;max-width:520px;height:auto}#pl circle{transition:fill .18s,opacity .18s;transform-box:fill-box;transform-origin:center}
+#pl circle.pop{animation:pop .35s ease}@keyframes pop{50%{transform:scale(2.2)}}
+.pc{display:flex;gap:22px;margin:4px 0}.pc div{text-align:center}.pc b{display:block;font-size:36px;font-variant-numeric:tabular-nums}.pc span{font-size:11px;opacity:.7;letter-spacing:.1em;text-transform:uppercase}
+.pb{position:relative;width:100%;max-width:520px;height:10px;border-radius:6px;background:rgba(255,255,255,.12);margin:12px 0 6px}
+.pb i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,#1fb86a,#7dffb0)}.pb u{position:absolute;top:-6px;bottom:-6px;width:2px;background:#ffd84a;box-shadow:0 0 8px #ffd84a}
+#pst{font-size:32px;font-weight:900;letter-spacing:.08em;opacity:0;transform:scale(1.7);transition:.45s cubic-bezier(.2,1.4,.4,1);margin:8px 0;text-align:center}#pst.on{opacity:1;transform:scale(1)}
+.lg{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:520px;margin-top:6px}.lg span{font-size:10px;padding:2px 7px;border-radius:999px;background:rgba(255,255,255,.08);opacity:.5;transition:.2s}.lg span.on{opacity:1;background:rgba(255,255,255,.25)}
+header{position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-34px;top:-34px;width:140px;height:140px;border-radius:50%;background:rgba(242,194,0,.28)}
+header h1{letter-spacing:.01em;position:relative}header div{position:relative}
+.k.al{border-color:var(--bad);background:rgba(192,57,43,.07)}.kr{display:flex;justify-content:space-between;align-items:center;margin:2px 0;font-size:11px}.mn{width:60px;height:18px;color:var(--ac)}
+em{font-style:normal;font-weight:700}em.up{color:#e67e22}em.dn{color:#2a9d5c}
+.card{animation:fi .35s ease both}@keyframes fi{from{opacity:0;transform:translateY(6px)}}
+.k{transition:transform .15s}.k:active{transform:scale(.98)}
+button.p{background:linear-gradient(135deg,var(--ac),#0a5c2e)}
+
+#cr{position:fixed;inset:0;z-index:60;background:rgba(5,8,14,.88);display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;overflow:auto}#cr[hidden]{display:none}
+#cr .bx{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;max-width:420px;width:100%;animation:fi .3s ease}
+#cr h3{margin:0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bad)}#cr h2{font-size:20px;text-transform:none;letter-spacing:0;color:var(--tx);margin:6px 0}#cr button{display:block;width:100%;margin-top:8px;text-align:left}
+#key,#ksv{display:none}#dif{font:inherit;padding:6px;border-radius:8px;border:0}
+
+:root:root:root{--bg:#090e17;--card:#111926;--tx:#eaf0f8;--mut:#8a97aa;--ac:#2fd480;--ac2:#f5c542;--bad:#ff5d6c;--bd:#202c3f;color-scheme:dark}
+header:after{display:none!important}
+body{background:radial-gradient(900px 420px at 50% -140px,rgba(47,212,128,.16),transparent),radial-gradient(600px 300px at 100% 0,rgba(245,197,66,.07),transparent),var(--bg)}
+header{background:linear-gradient(165deg,#0e3b2b 0%,#0a2233 55%,#0a1220 100%);border-bottom:1px solid rgba(245,197,66,.35);padding:16px 14px 14px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+header h1{font-size:20px;font-weight:800;letter-spacing:.02em}header #date{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+#rib span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+#hud{display:flex;gap:10px;align-items:center;margin-top:10px;position:relative}.hb{flex:1;height:8px;border-radius:6px;background:rgba(255,255,255,.12);overflow:hidden}.hb i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .6s}.hp{font-size:12px;font-weight:800;background:rgba(245,197,66,.16);border:1px solid rgba(245,197,66,.45);color:var(--ac2);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0) 40%),var(--card);border-radius:18px;border:1px solid var(--bd);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+h2{display:flex;align-items:center;gap:8px;color:#aab6c8}h2:before{content:"";width:4px;height:12px;border-radius:2px;background:var(--ac2)}#cr h2:before,#pl h2:before{display:none}
+.k{background:rgba(255,255,255,.03);border-radius:12px}.k b{font-size:21px;font-weight:800;font-variant-numeric:tabular-nums}.k.al{animation:pl 2s infinite}@keyframes pl{50%{box-shadow:0 0 0 1px var(--bad),0 0 16px rgba(255,93,108,.35)}}
+button{box-shadow:0 3px 0 rgba(0,0,0,.35);transition:transform .12s,filter .12s}button:active{transform:translateY(2px);box-shadow:none}
+#go{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:8;background:linear-gradient(180deg,#ffd75e,#e5a812);color:#2a1d00;font-weight:800;letter-spacing:.03em;box-shadow:0 4px 0 #9a6f00,0 10px 26px rgba(245,197,66,.3)}
+nav{left:10px;right:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);border:1px solid var(--bd);border-radius:20px;background:rgba(17,25,38,.9);backdrop-filter:blur(14px);box-shadow:0 12px 34px rgba(0,0,0,.5);overflow:hidden;padding-bottom:0}
+nav button{box-shadow:none;font-size:11px}nav button.on{border-top:0;background:rgba(245,197,66,.14);color:var(--ac2)}main{padding-bottom:120px}#toast{bottom:100px}
+.nw{border-top:1px solid var(--bd)}.tag{background:rgba(245,197,66,.16);color:var(--ac2);border:1px solid rgba(245,197,66,.4)}
+input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:var(--bd);margin:8px 0}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--ac2);border:3px solid #1a1400;box-shadow:0 0 0 2px var(--ac2),0 4px 10px rgba(0,0,0,.5)}input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ac2);border:3px solid #1a1400}
+.goals{display:flex;flex-wrap:wrap;gap:6px}.goals span{font-size:12px;padding:4px 9px;border-radius:999px;border:1px solid var(--bd);color:var(--mut)}.goals span.gy{color:var(--tx);border-color:var(--ac);background:rgba(47,212,128,.1)}
+#in{position:fixed;inset:0;z-index:70;background:radial-gradient(800px 500px at 50% 0,#12402f,#060a12);display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;overflow:auto}#in[hidden]{display:none}#in .bx{max-width:420px;width:100%;background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px}#in h3{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac2)}#in h2{font-size:24px;text-transform:none;letter-spacing:0;color:var(--tx);margin:6px 0 10px}#in h2:before{display:none}#in button{display:block;width:100%;margin-top:10px;text-align:left}
+
+:root:root:root{--bg:#0f1316;--card:#161c21;--tx:#e9e5d9;--mut:#8e988f;--ac:#6fae8a;--ac2:#c9a24d;--bad:#d0675d;--bd:#262f36;--serif:ui-serif,Georgia,"Times New Roman",serif}
+body{background:var(--bg)!important}
+header{background:#0e2a21!important;border-bottom:1px solid var(--ac2)!important;box-shadow:inset 0 4px 0 #1f5a42!important}
+header h1{font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:.01em}
+#rib span{border-radius:4px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.hb{border-radius:2px;height:4px}.hb i{background:var(--ac2)!important;border-radius:0}.hp{border-radius:4px;background:transparent!important;text-transform:uppercase;letter-spacing:.08em;font-size:11px}
+.card{background:var(--card)!important;border:1px solid var(--bd);border-radius:6px;box-shadow:none!important}
+h2{display:block;font:600 11px -apple-system,"Segoe UI",Roboto,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--ac2);border-bottom:1px solid var(--bd);padding-bottom:8px}h2:before{display:none}
+.k{background:transparent;border:1px solid var(--bd);border-radius:4px}.k b{font-family:var(--serif);font-weight:600}.k.al{animation:none;border-color:var(--bad)}
+button{box-shadow:none!important;border-radius:4px}
+#go{background:var(--ac2)!important;color:#1b1608!important;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+nav{left:0;right:0;bottom:0;border:0;border-top:1px solid var(--bd);border-radius:0;background:#12171b;backdrop-filter:none;box-shadow:none;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:15px 0;border-radius:0}nav button.on{background:transparent;color:var(--ac2);box-shadow:inset 0 -2px 0 var(--ac2)!important}main{padding-bottom:84px}#toast{bottom:66px}
+.tag{border-radius:2px;background:transparent!important;color:var(--ac2);border:1px solid var(--ac2);text-transform:uppercase;font-size:10px;letter-spacing:.08em}
+input[type=range]::-webkit-slider-thumb{width:18px;height:18px;background:var(--tx);border:2px solid var(--ac2);box-shadow:none}input[type=range]::-moz-range-thumb{background:var(--tx);border:2px solid var(--ac2)}
+.goals span{border-radius:3px}#cr .bx,#in .bx{border-radius:6px}#cr h2,#in h2{font-family:var(--serif);font-weight:600;border:0}#in{background:#0b1411}
+#rp{position:fixed;inset:0;z-index:65;background:rgba(9,11,13,.97);overflow:auto;padding:18px 14px 96px;box-sizing:border-box}#rp[hidden]{display:none}
+#rp h3{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac2)}#rp h2{font-family:var(--serif);font-size:24px;text-transform:none;letter-spacing:0;color:var(--tx);border:0;margin:4px 0 14px;padding:0}
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.rc{background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:12px;opacity:0;transform:translateY(12px);animation:ri .5s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*40ms)}@keyframes ri{to{opacity:1;transform:none}}
+.rl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}.rn{font:600 26px/1.2 var(--serif);font-variant-numeric:tabular-nums}.rn small{font:700 12px -apple-system,sans-serif;margin-left:8px}
+.rd.g{color:var(--ac)}.rd.b{color:var(--bad)}.rd.z{color:var(--mut)}.rw{font-size:12.5px;line-height:1.45;color:#c4c9bf;margin-top:6px}
+.rh{font-size:13px;line-height:1.45;padding:8px 0;border-top:1px solid var(--bd)}.rh b{color:var(--ac2);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-right:6px}
+#rp .ft{position:fixed;left:0;right:0;bottom:0;padding:12px 14px calc(env(safe-area-inset-bottom,0px) + 12px);background:var(--bg);border-top:1px solid var(--bd)}#rp .ft button{width:100%}
+
+#tk{overflow:hidden;white-space:nowrap;background:#0b0f12;border-bottom:1px solid var(--bd);font:600 12px ui-monospace,Menlo,Consolas,monospace;color:#cfd3c8}#tk div{display:inline-block;padding:7px 0;animation:mq 45s linear infinite}#tk span{margin:0 20px}@keyframes mq{to{transform:translateX(-50%)}}
+#ag{position:fixed;inset:0;z-index:66;background:rgba(9,11,13,.96);display:flex;padding:16px;box-sizing:border-box;overflow:auto}#ag[hidden]{display:none}#ag .bx{max-width:460px;width:100%;background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:18px;margin:auto;animation:ri .4s ease both}#ag h3{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac2)}#ag h2{font-family:var(--serif);font-weight:600;font-size:22px;text-transform:none;letter-spacing:0;color:var(--tx);border:0;margin:6px 0 8px;padding:0}#ag button{display:block;width:100%;margin-top:8px;text-align:left}
+.fd{opacity:0;animation:ri .8s ease forwards;animation-delay:calc(var(--i)*1.2s + .3s)}#in p{line-height:1.55}#in input{width:100%;box-sizing:border-box;padding:12px;border-radius:4px;border:1px solid var(--bd);background:#0f1316;color:var(--tx);font:inherit;margin:6px 0}
+</style></head><body>
+<header><h1>Ministro da Economia do Brasil</h1><div id="date"></div><div id="rib"></div><div id="hud"></div><div style="margin-top:8px;display:flex;gap:8px;align-items:center;position:relative;z-index:2"><select id="dif"><option value="0.6">Fácil</option><option value="1">Normal</option><option value="1.7">Difícil</option></select><button id="rs" class="s" style="padding:6px 10px;font-size:12px">↻ Novo mandato</button></div></header>
+<main>
+<button id="go">Fechar o mês ▶</button>
+<section class="tab on" id="t0">
+<div class="card"><h2>Indicadores</h2><div class="grid" id="kpis"></div></div>
+<div class="card"><h2>Boletim Focus (projeções do mercado)</h2><div id="foc"></div></div>
+<div class="card"><h2>Componentes do IPCA (12 meses, aprox.)</h2><div class="grid" id="ipc"></div></div>
+<div class="card"><h2>Rating, presidente e conquistas</h2><div id="ext2"></div><div id="ext"></div></div>
+<div class="card"><h2>Efeito acumulado das suas medidas (24 meses)</h2><div id="act"></div><div class="mut">Soma do efeito das medidas aprovadas, com rampa de 3 meses até o efeito pleno.</div></div>
+<div class="card"><h2>Histórico</h2><div class="wrap"><svg id="ch" viewBox="0 0 320 120"></svg></div>
+<div class="mut"><span class="ok">verde</span> IPCA 12m · <span class="bad">vermelho</span> Selic ÷ 3 · cinza desemprego</div></div>
+</section>
+<section class="tab" id="t1">
+<div class="card"><h2>Orçamento e política</h2>
+<label><span>Despesa primária (% PIB)</span><b id="vg"></b></label><input type="range" id="g" min="17" max="23" step="0.1">
+<label><span>Carga tributária federal (% PIB)</span><b id="vc"></b></label><input type="range" id="c" min="17" max="22" step="0.1">
+<label><span>Investimento público (% PIB)</span><b id="vi"></b></label><input type="range" id="i" min="0.5" max="3" step="0.1">
+<label><span>Emendas parlamentares liberadas</span><b id="vem"></b></label><input type="range" id="em" min="0" max="10" step="0.5">
+<label><span>Pressão sobre o Banco Central</span><b id="vp"></b></label><input type="range" id="p" min="0" max="3" step="1">
+<div class="mut" id="hint"></div></div>
+<div class="card"><h2>Orçamento detalhado (valores anuais, base 2026)</h2><div id="lvs"></div><div class="mut" id="lvt"></div></div>
+<div class="card"><h2>Projetos para enviar ao Congresso (toque para propor)</h2><div id="pj"></div></div>
+</section>
+<section class="tab" id="t2">
+<div class="card"><h2>Gabinete técnico</h2>
+<div class="mut">Escreva ou dite qualquer medida: “zerar imposto de importação de máquinas”, “criar programa de crédito para pequenas empresas”. Quatro assessores (Tesouro, articulação política, AGU e mercado) opinam em poucas linhas. Você decide: enviar, usar a alternativa ou insistir contra o conselho, com as consequências. Limite de 3 análises por mês.</div>
+<div id="chat"></div>
+<textarea id="tx" placeholder="Digite a sua proposta ao gabinete..."></textarea>
+<div class="row"><button class="s" id="mic" style="display:none">Ditar</button><button class="p" id="send">Enviar</button></div>
+<div class="mut" id="aist"></div>
+<div class="mut" style="margin-top:8px"></div><div class="row"><input id="key" type="password" placeholder="sk-ant-..." style="flex:3;border:1px solid var(--bd);border-radius:10px;padding:8px;background:var(--bg);color:var(--tx)"><button class="s" id="ksv">Salvar</button></div></div>
+</section>
+<section class="tab" id="t3"><div class="card" id="jornal"><h2>Jornal do mês</h2></div></section>
+<section class="tab" id="t4"><div class="card"><h2>Pauta do plenário</h2><div id="pauta"></div></div><div class="card"><h2>Câmara dos Deputados · 513 cadeiras</h2><div class="mut" id="cmeta"></div><div id="cong"></div></div></section>
+<div class="mut" style="margin-top:12px">Modelo simplificado. Base de nov/2026: Selic 13,75% (Copom de 4/11), dólar perto de R$ 5,45, IPCA 12m perto de 4,6%. PIB, desemprego, dívida e reservas são estimativas.</div>
+</main>
+<div id="pl" hidden></div>
+<div id="cr" hidden></div><div id="in" hidden></div><div id="rp" hidden></div><div id="toast"></div>
+<nav id="nav"><button class="on" data-t="0">Painel</button><button data-t="1">Política</button><button data-t="2">Gabinete</button><button data-t="3">Jornal</button><button data-t="4">Câmara</button></nav>
+<script>
+const $=id=>document.getElementById(id);
+let _a=(Date.now()^0x9e3779b9)>>>0;const R=()=>{_a=(_a+0x6D2B79F5)|0;let t=Math.imul(_a^_a>>>15,1|_a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};window.__seed=x=>{_a=x>>>0};
+const rnd=()=>{let u=0,v=0;while(!u)u=R();while(!v)v=R();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x));
+const fmt=(x,d=2)=>Number(x).toFixed(d).replace(".",",");
+const pick=a=>a[Math.floor(R()*a.length)];
+const M=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+const B={g:1.5,p:.15,prim:1.5,prem:.3,pop:3};
+const init=()=>({m:0,selic:13.75,cambio:5.45,g:1.9,u:5.6,div:79,gasto:19,carga:18.8,inv:1.2,prem:1.05,exp:4.8,pop:48,ibov:100,res:350,cp:50,neg:{},ic:{al:Array(12).fill(.4),adm:Array(12).fill(.35),srv:Array(12).fill(.4),ind:Array(12).fill(.25)},pauta:[],pend:[],em:2,rel:Array(15).fill(50),ipm:Array(12).fill(.375),sl:[13.75,13.75,13.75],hist:[],mods:[],done:[],news:[],chat:[],ai:0,over:false});
+let S=init();
+try{const x=localStorage.getItem("mme2");if(x)S=Object.assign(init(),JSON.parse(x));if(S.rs)_a=S.rs>>>0}catch(e){}
+const save=()=>{try{const b=init();for(const k in b)if(typeof b[k]==="number"&&!isFinite(S[k]))S[k]=b[k];S.v=12;S.rs=_a;localStorage.setItem("mme2",JSON.stringify(S))}catch(e){}};
+const PJ=[
+{id:1,tp:"PEC",l:.3,n:"Reforma tributária complementar",d:"Simplifica impostos: mais crescimento em 6 meses, desgaste agora.",p:.5,pop:-3,e:{g:.5,prim:.2},dl:6,dur:999},
+{id:2,tp:"PL",l:.9,n:"Privatizações",d:"Reduz a dívida de uma vez, com custo político.",p:.5,pop:-2,once:{div:-1.5},e:{prim:.1},dl:3,dur:999},
+{id:3,tp:"PEC",l:.8,n:"Reforma administrativa",d:"Economia no custeio a longo prazo.",p:.4,pop:-4,e:{prim:.45},dl:12,dur:999},
+{id:4,tp:"PL",l:-.8,n:"Aumento real do salário mínimo",d:"Mais consumo e aprovação, mais gasto e inflação.",p:.8,pop:3,e:{g:.2,p:.03,prim:-.15},dl:0,dur:999},
+{id:5,tp:"MP",l:-.4,n:"Desoneração de combustíveis",d:"Alivia a inflação por 6 meses e custa receita.",p:.85,pop:2,e:{p:-.12,prim:-.2},dl:0,dur:6},
+{id:6,tp:"Exec",l:0,n:"Venda de reservas (intervenção no câmbio)",d:"Derruba o dólar agora e gasta US$ 20 bi.",p:.95,pop:0,once:{cambioPct:-3,res:-20},e:{},dl:0,dur:1},
+{id:7,tp:"MP",l:-.5,n:"Programa de crédito e habitação",d:"Impulsiona o PIB por 12 meses.",p:.7,pop:2,e:{g:.4,p:.04,prim:-.15},dl:2,dur:12},
+{id:8,tp:"PLP",l:.2,n:"Combate à sonegação",d:"Aumenta a arrecadação sem subir alíquota.",p:.6,pop:-1,e:{prim:.3},dl:4,dur:999}];
+const TH={PL:257,PLP:257,MP:257,PEC:308,Exec:0};
+const PARTIES=[{n:"PL",s:121,e:.6,f:.5,l:"Dep. Altair Mourão"},{n:"PT-PCdoB-PV",s:88,e:-.8,f:.3,l:"Dep. Selma Cavalcanti"},{n:"União Brasil-PP",s:87,e:.4,f:.9,l:"Dep. Jurandir Tavares"},{n:"PSD",s:43,e:.2,f:.8,l:"Dep. Heitor Lacerda"},{n:"Republicanos",s:41,e:.4,f:.7,l:"Dep. Raimundo Brito"},{n:"MDB",s:36,e:.1,f:.9,l:"Dep. Odete Fontoura"},{n:"Podemos",s:27,e:.2,f:.6,l:"Dep. Gil Amaral"},{n:"PSOL-Rede",s:15,e:-1,f:0,l:"Dep. Marta Ribeiro"},{n:"PSB",s:15,e:-.5,f:.4,l:"Dep. Caio Bezerra"},{n:"PSDB-Cidadania",s:11,e:.3,f:.3,l:"Dep. Lúcia Andrade"},{n:"Novo",s:10,e:1,f:0,l:"Dep. Rodrigo Valente"},{n:"PRD-Solidariedade",s:7,e:.1,f:.7,l:"Dep. Nélson Paiva"},{n:"PDT",s:6,e:-.4,f:.4,l:"Dep. Vera Quintela"},{n:"Avante",s:5,e:0,f:.8,l:"Dep. Tião Medeiros"},{n:"Missão",s:1,e:.8,f:0,l:"Dep. Davi Lopes"}];
+const SEN=[{n:"PL",s:28,j:0},{n:"PT",s:9,j:1},{n:"MDB",s:8,j:5},{n:"PP",s:6,j:2},{n:"União Brasil",s:6,j:2},{n:"Republicanos",s:5,j:4},{n:"PSD",s:5,j:3},{n:"PSB",s:4,j:8},{n:"Novo",s:3,j:10},{n:"Podemos",s:2,j:6},{n:"PSDB",s:2,j:9},{n:"PDT",s:1,j:12},{n:"Rede",s:1,j:7},{n:"Sem partido",s:1,j:13}];
+const THS={PL:41,PLP:41,MP:41,PEC:49,Exec:0};
+function votar(tp,l,det,sen){const T=sen?THS:TH;if(tp==="Exec")return{y:0,ys:[],ok:true,tp,need:0};const L=sen?SEN:PARTIES.map((p,j)=>({s:p.s,j})),rd=tp==="PEC"?2:1,ys=[],rds=[];let ok=true;
+ for(let r=0;r<rd;r++){let y=0;const yy=[],aa=[];L.forEach(q=>{const p=PARTIES[q.j],z=1.5*p.e*l+(S.rel[q.j]-50)/40+p.f*(S.em-2)*.25+(S.pop-45)/(sen?90:60)-(S.cp<20?.15:0),v=Math.round(q.s*cl(1/(1+Math.exp(-z))+(det?0:rnd()*(sen?.08:.05)),0,1));yy.push(v);aa.push(Math.round((q.s-v)*.1));y+=v});rds.push({y:yy,a:aa});ys.push(y);if(y<T[tp])ok=false}
+ return{y:ys[ys.length-1],ys,ok,tp,need:T[tp],rd:rds}}
+function mk(L,R,r0,dr,rad){const N=L.reduce((a,q)=>a+q.s,0),rs=[...Array(R)].map((_,i)=>r0+i*dr),S0=rs.reduce((a,b)=>a+b,0),out=[];let left=N;rs.forEach((r,i)=>{const n=i===R-1?left:Math.round(N*r/S0);left-=n;for(let k=0;k<n;k++){const th=Math.PI-Math.PI*(k+.5)/n;out.push({x:180+r*Math.cos(th),y:182-r*Math.sin(th),th,r})}});out.sort((a,b)=>b.th-a.th||a.r-b.r);const ord=L.map((q,i)=>i).sort((a,b)=>PARTIES[L[a].j].e-PARTIES[L[b].j].e);let c=0;for(const i of ord)for(let k=0;k<L[i].s;k++)out[c++].j=i;return{N,L,seats:out,ord,rad}}
+const CH={cam:mk(PARTIES.map((p,j)=>({n:p.n,s:p.s,j})),9,60,13.5,2.5),sen:mk(SEN,4,70,25,6)};
+let KEY="";try{KEY=localStorage.getItem("mmk")||""}catch(e){}
+const canAsk=()=>true;
+async function ask(pm){if(sample)return sample.json(pm,{modelTier:"default"});const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":KEY,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-5-5",max_tokens:1500,messages:[{role:"user",content:pm}]})}),d=await r.json();return JSON.parse((d.content||[]).map(x=>x.text||"").join("").replace(/```json|```/g,"").trim())}
+let busy=0;
+function plenario(ti,tp,v,ch){return new Promise(res=>{
+ if(!v.rd){res();return}
+ const C=CH[ch],el=$("pl");el.hidden=false;let skip=false;const col=j=>`hsl(${(PARTIES[C.L[j].j].e+1)/2*230},70%,55%)`;
+ el.innerHTML=`<h3>${{PEC:"Proposta de Emenda à Constituição",PLP:"Projeto de Lei Complementar",MP:"Medida Provisória",PL:"Projeto de Lei"}[tp]||"Votação"} · ${ch==="sen"?"Plenário do Senado Federal":"Plenário da Câmara"}</h3><h2>${ti}</h2><div id="pr" style="opacity:.8"></div><svg viewBox="0 0 360 192">${C.seats.map((q,i)=>`<circle id="d${i}" cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" r="${C.rad}" fill="${col(q.j)}" opacity=".35"/>`).join("")}</svg><div class="pc"><div><b id="ps" style="color:#5df0a0">0</b><span>Sim</span></div><div><b id="pn" style="color:#ff7b7b">0</b><span>Não</span></div><div><b id="pa" style="color:#aab">0</b><span>Ausentes</span></div></div><div class="pb"><i id="pi"></i><u style="left:${v.need/C.N*100}%"></u></div><div style="font-size:12px;opacity:.7">Mínimo de ${v.need} votos (marca amarela)</div><div class="lg">${C.ord.map(j=>`<span id="l${j}" style="border-left:3px solid ${col(j)}">${C.L[j].n}</span>`).join("")}</div><div id="pst"></div><div class="row" style="width:100%;max-width:520px"><button class="s" id="psk">Pular animação</button></div>`;
+ $("psk").onclick=()=>{skip=true};
+ const run=r=>new Promise(done=>{let Y=0,N=0,A=0,p=0,cj=-1;C.seats.forEach((q,i)=>{const d=$("d"+i);d.setAttribute("fill",col(q.j));d.setAttribute("opacity",".35");d.classList.remove("pop")});$("pst").className="";$("pi").style.width="0";
+  const q=[];for(const j of C.ord){const idx=C.seats.map((x,i)=>x.j===j?i:-1).filter(i=>i>=0).sort(()=>R()-.5),y=r.y[j],a=r.a[j],o=[...Array(y).fill("y"),...Array(a).fill("a"),...Array(C.L[j].s-y-a).fill("n")].sort(()=>R()-.5);idx.forEach((di,k)=>q.push([j,di,o[k]]))}
+  const tick=()=>{const n=skip?q.length:ch==="sen"?1:2+(p>q.length*.5?1:0);for(let k=0;k<n&&p<q.length;k++,p++){const[j,di,o]=q[p];if(j!==cj){if(cj>=0)$("l"+cj).classList.remove("on");$("l"+j).classList.add("on");cj=j}const d=$("d"+di);d.setAttribute("fill",o==="y"?"#3df09a":o==="n"?"#ff5c6c":"#8892a6");d.setAttribute("opacity",o==="a"?".5":"1");if(!skip&&o!=="a")d.classList.add("pop");o==="y"?Y++:o==="n"?N++:A++}
+   $("ps").textContent=Y;$("pn").textContent=N;$("pa").textContent=A;$("pi").style.width=Y/C.N*100+"%";
+   if(p<q.length)setTimeout(tick,skip?0:ch==="sen"?60:24);else{if(cj>=0)$("l"+cj).classList.remove("on");done(Y)}};tick()});
+ (async()=>{for(let k=0;k<v.rd.length;k++){$("pr").textContent=v.rd.length>1?`${k+1}º turno`:"Votação nominal";const Y=await run(v.rd[k]),ok=Y>=v.need,last=k===v.rd.length-1;$("pst").textContent=ok?(last?"APROVADA":"APROVADA NO "+(k+1)+"º TURNO"):"DERROTADA";$("pst").style.color=ok?"#5df0a0":"#ff7b7b";$("pst").className="on";try{navigator.vibrate&&navigator.vibrate(ok?[40,40,80]:200)}catch(e){}
+  if(!ok)break;if(!last)await new Promise(r=>setTimeout(r,skip?300:1900))}
+  $("psk").textContent="Continuar";$("psk").onclick=()=>{el.hidden=true;res()}})()})}
+async function votarPauta(){const it=S.pauta.find(x=>(x.at||0)<=S.m);if(!it){if(S.pauta.length)say("Aguardando o prazo do Senado. Feche o mês.");return}if(busy)return;busy=1;
+ try{const pj=it.k==="pj",o=pj?PJ.find(x=>x.id===it.id):S.chat.find(x=>x.id===it.id);if(!o){S.pauta.splice(S.pauta.indexOf(it),1);return}
+  const tp=o.tp,ti=pj?o.n:o.ti,sen=it.st==="sen",forced=!pj&&o.rec!=="enviar",v=votar(tp,o.l,0,sen);
+  await plenario(ti,tp,v,sen?"sen":"cam");S.pauta.splice(S.pauta.indexOf(it),1);
+  const vs=v.ys.length?`${v.ys.join(" / ")} votos, mínimo ${v.need}`:"ato do Executivo",casa=sen?"Senado":"Câmara";
+  const fim=m=>{S.pend.push(m);if(!pj){o.s="e";o.res=m}say(m)};
+  if(!v.ok){S.pop=cl(S.pop-1,5,90);fim(`${tp} derrotada no ${casa}: ${ti} (${vs}).`);return}
+  if(!sen&&tp!=="Exec"){it.st="sen";it.at=S.m;S.pauta.unshift(it);S._ch=1;S.pend.push(`${tp} aprovada na Câmara: ${ti} (${vs}). Segue ao Senado.`);say("Aprovada na Câmara. Seguindo para o Senado.");return}
+  const jur=pj||R()>=Math.min(.95,o.rj*(forced?1.3:1)),alt=sen&&R()<.25,k=alt?.8:1,e0=pj?o.e:o.ef,ef={};for(const q in e0)ef[q]=e0[q]*k;
+  if(!jur){S.pop=cl(S.pop-2,5,90);fim(`${tp} aprovada no Congresso (${vs}), mas barrada na Justiça: ${ti}.`);return}
+  S.mods.push({t0:S.m,dl:o.dl,dur:pj?o.dur:o.du,e:ef,rj:pj?0:o.rj,ti});
+  if(pj){S.done.push(o.id);S.pop+=o.pop;if(o.once){S.div+=o.once.div||0;S.res+=o.once.res||0;if(o.once.cambioPct)S.cambio*=1+o.once.cambioPct/100}}else S.pop=cl(S.pop+o.pn,5,90);
+  fim(`${tp} sancionada: ${ti} (${vs}).${alt?" O Senado alterou o texto: efeito 20% menor.":""}${!pj&&o.rj>.3?" Há risco de liminar nos próximos meses.":""}`);
+ }finally{busy=0;save();render();if(S._ch){S._ch=0;setTimeout(votarPauta,1400)}}}
+let VW=0,Q=[],sample=null,dict=null;
+const wgt=(x,m)=>{const t=m-(x.t0+x.dl);return t<0||t>=x.dur?0:Math.min(1,(t+1)/3)};
+function MOD(){const o={g:0,p:0,prim:0,prem:0,pop:0};for(const x of S.mods){const w=wgt(x,S.m);if(w)for(const k in o)o[k]+=(x.e[k]||0)*w}for(const k in o)o[k]=cl(o[k],-B[k],B[k]);return o}
+function say(t){const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(say.t);say.t=setTimeout(()=>e.classList.remove("on"),2800)}
+function spark(a,l,u){const mx=Math.max(.05,...a.map(Math.abs)),W=150,H=58,f=a[a.length-1],pts=a.map((v,i)=>`${4+i/(a.length-1)*(W-8)},${H/2-v/mx*(H/2-10)}`).join(" ");return `<svg viewBox="0 0 ${W} ${H}"><line x1="4" x2="${W-4}" y1="${H/2}" y2="${H/2}" stroke="#999" stroke-dasharray="2"/><polyline fill="none" stroke="${f>=0?"#2a9d5c":"#d55"}" stroke-width="2" points="${pts}"/><text x="6" y="11" font-size="9" fill="#888">${l}</text><text x="${W-6}" y="${H-4}" font-size="9" text-anchor="end" fill="#888">24m: ${f>0?"+":""}${fmt(f)}${u}</text></svg>`}
+const grid=A=>`<div class="ix">${spark(A.g,"PIB","pp")}${spark(A.i,"IPCA 12m","pp")}${spark(A.prim,"Primário","pp")}${spark(A.prem,"Prêmio de risco","")}${spark(A.pop,"Aprovação","pp")}</div>`;
+function curva(f){const A={g:[],i:[],prim:[],prem:[],pop:[]},ph=[];for(let t=0;t<24;t++){const o=f(t);ph.push(o.p||0);A.g.push(o.g||0);A.i.push(ph.slice(-12).reduce((a,b)=>a+b,0));A.prim.push(o.prim||0);A.prem.push(o.prem||0);A.pop.push(o.pop||0)}return grid(A)}
+const impacto=(e,dl,dur)=>curva(t=>{const w=wgt({t0:0,dl,dur},t),o={};for(const k in e)o[k]=e[k]*w;return o});
+const actTot=()=>curva(t=>{const o={g:0,p:0,prim:0,prem:0,pop:0};for(const x of S.mods){const w=wgt(x,S.m+t);if(w)for(const k in o)o[k]+=(x.e[k]||0)*w}return o});
+const onceTxt=o=>o?" · medida pontual:"+(o.div?` dívida ${fmt(o.div,1)} pp do PIB`:"")+(o.cambioPct?` dólar ${o.cambioPct}%`:"")+(o.res?` reservas US$ ${o.res} bi`:""):"";
+
+const ipca12=()=>(S.ipm.reduce((a,x)=>a*(1+x/100),1)-1)*100;
+const prim=(gv,cv,iv)=>(cv??S.carga)+.1*(S.g-2)-(gv??S.gasto)-((iv??S.inv)-1.2)+MOD().prim-(S.em-2)*.1;
+function render(){
+ const i=ipca12(),pr=prim();
+ const hs=S.hist,ser=f=>hs.map(f).filter(v=>v!==undefined&&!isNaN(v)),mini=f=>{const a=ser(f);if(a.length<2)return"";const mn=Math.min(...a),mx=Math.max(...a),r=(mx-mn)||1;return `<svg viewBox="0 0 60 18" class="mn"><polyline fill="none" stroke="currentColor" stroke-width="1.5" points="${a.map((v,j)=>`${(j/(a.length-1)*58+1).toFixed(1)},${(16-(v-mn)/r*14).toFixed(1)}`).join(" ")}"/></svg>`},dl=f=>{const a=ser(f);if(a.length<2)return"";const x=a[a.length-1]-a[a.length-2];return `<em class="${x>0.005?"up":x<-0.005?"dn":""}">${x>0.005?"▲":x<-0.005?"▼":"■"} ${fmt(Math.abs(x))}</em>`},jr=S.selic/100*S.div;
+ const k=[["Selic",fmt(S.selic)+"%","Juro real "+fmt(S.selic-S.exp,1)+"%",0,"s"],["IPCA 12m",fmt(i)+"%","Meta 3% ±1,5",i>4.5||i<1.5,"i"],["Dólar","R$ "+fmt(S.cambio),"Reservas US$ "+Math.round(S.res)+" bi",S.cambio>6,"c"],["PIB (ritmo anual)",fmt(S.g,1)+"%","Hiato "+fmt(S.g-2.2,1)+" pp",S.g<1,"g"],["Desemprego",fmt(S.u,1)+"%","Taxa",S.u>8,"u"],["Dívida bruta",fmt(S.div,1)+"% PIB","Alerta acima de 85",S.div>85,"d"],["Primário",fmt(pr)+"% PIB","Meta perto de 0",pr<-1,"r"],["Juros nominais",fmt(jr,1)+"% PIB","Nominal "+fmt(pr-jr,1)+"% PIB",jr>8,0],["Popularidade",Math.round(S.pop)+"%","Aprovação",S.pop<30,"p"],["Capital político",Math.round(S.cp),"Para negociar e propor",S.cp<15,0],["Ibovespa (base 100)",fmt(S.ibov,1),"Bolsa",0,0],["Prêmio de risco",fmt(S.prem,2),"1,00 = normal",S.prem>1.4,0]];
+ $("kpis").innerHTML=k.map(x=>`<div class="k ${x[3]?"al":""}"><span>${x[0]}</span><b class="${x[3]?"bad":""}">${x[1]}</b><div class="kr">${x[4]?dl(h=>h[x[4]]):""}${x[4]?mini(h=>h[x[4]]):""}</div><span>${x[2]}</span></div>`).join("");
+ const IC={al:"Alimentos",adm:"Administrados",srv:"Serviços",ind:"Bens industriais"};
+ $("ipc").innerHTML=Object.keys(IC).map(q=>{const t=S.ic[q].reduce((a,v)=>a+v,0);return `<div class="k"><span>${IC[q]}</span><b>${fmt(t)}%</b><div class="bar"><i style="width:${cl(t*10,0,100)}%"></i></div></div>`}).join("");
+ $("foc").innerHTML=[["IPCA no fim do ano",fmt(S.exp)+"%"],["Selic no fim do ano",fmt(cl(S.exp+7.5+(i-3.5)+.5*(S.prem-1),2,26))+"%"],["PIB do ano",fmt(S.g,1)+"%"],["Câmbio no fim do ano","R$ "+fmt(S.cambio*(1+(S.prem-1)*.05))],["Resultado primário",fmt(pr)+"% PIB"]].map(x=>`<div class="nw" style="display:flex;justify-content:space-between"><span>${x[0]}</span><b>${x[1]}</b></div>`).join("");
+ const mm=(S.m+11)%12,yy=2026+Math.floor((S.m+11)/12);
+ $("date").textContent=`Mês ${Math.min(S.m+1,24)} de 24 · ${M[mm]}/${yy}`;
+ $("rib").innerHTML=[`Selic ${fmt(S.selic)}%`,`IPCA ${fmt(i)}%`,`Dólar R$ ${fmt(S.cambio)}`,`PIB ${fmt(S.g,1)}%`,`Aprov. ${Math.round(S.pop)}%`,`Capital ${Math.round(S.cp)}`].map(x=>`<span>${x}</span>`).join("");$("act").innerHTML=actTot();$("vg").textContent=fmt(+$("g").value,1)+"%";$("vc").textContent=fmt(+$("c").value,1)+"%";$("vi").textContent=fmt(+$("i").value,1)+"%";
+ $("vp").textContent=["nenhuma","leve","forte","máxima"][$("p").value];
+ $("hint").textContent=`Primário com a sua proposta: ${fmt(prim(+$("g").value,+$("c").value,+$("i").value))}% do PIB. Subir imposto ou cortar gasto arrisca derrota no Congresso. Pressionar o BC baixa o juro, mas a credibilidade cai.`;
+ $("pj").innerHTML=PJ.map(p=>{const dn=S.done.includes(p.id),sl=S.pauta.some(x=>x.k==="pj"&&x.id===p.id),v=votar(p.tp,p.l,1),v2=votar(p.tp,p.l,1,1),ok=p.tp==="Exec"||(v.y>=v.need&&v2.y>=v2.need);return `<div class="pj" style="flex-wrap:wrap"><div><b>${p.tp} · ${p.n}</b><br>${p.d}<br><span class="mut">Placar projetado: <b class="${ok?"ok":"bad"}">${p.tp==="Exec"?"sem votação":"Câmara "+v.y+"/"+v.need+" · Senado "+v2.y+"/"+v2.need}</b> · custo 10 de capital político · efeito em ${p.dl} meses, duração ${p.dur>36?"permanente":p.dur+" meses"}</span></div><button class="s" data-v="${p.id}">Impacto</button><button class="s ${sl?"sel":""}" ${dn||sl?"disabled":""} data-p="${p.id}">${dn?"Aprovado":sl?"Na pauta":"Propor"}</button>${VW===p.id?`<div style="width:100%">${impacto(p.e,p.dl,p.dur)}<div class="mut">Efeito imediato: aprovação ${p.pop>0?"+":""}${p.pop} pp${onceTxt(p.once)}</div></div>`:""}</div>`}).join("");
+ const h=S.hist,pt=(f,sc)=>h.map((x,j)=>`${j/Math.max(1,23)*310+5},${115-f(x)*sc}`).join(" ");
+ $("ch").innerHTML=h.length>1?`<polyline fill="none" stroke="#3a7" stroke-width="2" points="${pt(x=>x.i,12)}"/><polyline fill="none" stroke="#d55" stroke-width="2" points="${pt(x=>x.s/3,12)}"/><polyline fill="none" stroke="#999" stroke-width="2" points="${pt(x=>x.u,12)}"/>`:"";
+ $("chat").innerHTML=chatHTML();
+ $("jornal").innerHTML="<h2>Jornal do mês</h2>"+(S.news.length?S.news.map(g=>`<div class="hd">${g.h}</div>`+g.l.map(n=>`<div class="nw"><span class="tag">${n[0]}</span>${n[1]}</div>`).join("")).join(""):'<div class="mut">Feche o primeiro mês para ver o jornal.</div>');
+ const base=PARTIES.reduce((a,p,j)=>a+(S.rel[j]>=60?p.s:0),0);
+ $("cmeta").textContent=`Base aliada (relação 60 ou mais): ${base} deputados. PL, PLP e MP precisam de 257 votos. PEC precisa de 308, em dois turnos. Bancadas reais eleitas em 2026; posições, relações e nomes dos líderes são fictícios ou estimados.`;
+ $("cong").innerHTML=PARTIES.map((p,j)=>`<div class="pj" style="flex-wrap:wrap"><div><b>${p.n}</b> · ${p.s} dep. (${fmt(p.s/5.13,1)}%)<br><span class="mut">Posição ${p.e>0?"+":""}${p.e} · fisiologismo ${Math.round(p.f*100)}% · ${p.l}</span><div class="bar"><i style="width:${S.rel[j]}%"></i></div>Relação <b class="${S.rel[j]<40?"bad":S.rel[j]>=60?"ok":""}">${Math.round(S.rel[j])}</b> ${S.neg[j]?'<span class="mut">(já negociado neste mês)</span>':""}</div><button class="s" data-n="${j}" data-a="c">Conversar<br><small>5 PC</small></button><button class="s" data-n="${j}" data-a="e">Emenda<br><small>R$ 1,5 bi</small></button></div>`).join("");
+ $("vem").textContent="R$ "+fmt(+$("em").value,1)+" bi/mês";
+ $("aist").textContent=canAsk()?`Análises do gabinete neste mês: ${S.ai}/3`:"Gabinete indisponível.";
+ $("send").disabled=!canAsk()||S.over;$("go").disabled=!!S.over||busy;$("go").textContent=S.over?"Mandato encerrado":S.pauta.some(x=>(x.at||0)<=S.m)?`Ir à votação (${S.pauta.filter(x=>(x.at||0)<=S.m).length})`:S.pauta.length?`Fechar o mês ▶ (${S.pauta.length} aguardando o Senado)`:"Fechar o mês ▶";
+ $("pauta").innerHTML=S.pauta.length?S.pauta.map(x=>{const t=x.k==="pj"?PJ.find(y=>y.id===x.id):S.chat.find(y=>y.id===x.id),w=(x.at||0)>S.m;return `<div class="nw"><span class="tag">${x.st==="sen"?"Senado":"Câmara"}</span>${t?t.tp+" · "+(t.n||t.ti):"Proposta"}${w?' <span class="mut">(aguarda o prazo: próximo mês)</span>':""}</div>`}).join("")+(S.pauta.some(x=>(x.at||0)<=S.m)?`<button style="width:100%;margin-top:8px" class="p">Ir à votação ▶</button>`:""):'<div class="mut">Nenhum projeto na pauta. Proponha na aba Política ou no Gabinete.</div>';
+}
+function news(pm,dC,dI,mv,evs,pr){
+ const i=ipca12(),L=[];
+ L.push(["Inflação",pm>.5?pick([`IPCA de ${fmt(pm)}% no mês surpreende e pressiona alimentos e energia.`,`Inflação mensal de ${fmt(pm)}% acende alerta entre economistas.`]):pm<.15?pick([`IPCA desacelera para ${fmt(pm)}% e alivia o bolso das famílias.`,`Preços quase estáveis: IPCA de ${fmt(pm)}% no mês.`]):`IPCA do mês fica em ${fmt(pm)}%. Em 12 meses: ${fmt(i)}%, ${i>4.5?"acima do teto da meta":"dentro da meta"}.`]);
+ if(mv!==null)L.push(["Copom",mv>0?`Copom sobe a Selic para ${fmt(S.selic)}% e cita pressão de preços e riscos fiscais.`:mv<0?`Copom corta a Selic para ${fmt(S.selic)}%, mas avisa que seguirá dependente de dados.`:`Copom mantém a Selic em ${fmt(S.selic)}% por unanimidade e pede cautela.`]);
+ L.push(["Câmbio",dC>2?`Dólar dispara e fecha a R$ ${fmt(S.cambio)} com tensão fiscal e externa.`:dC<-2?`Real ganha força: dólar cai para R$ ${fmt(S.cambio)}.`:`Dólar oscila e fecha o mês a R$ ${fmt(S.cambio)}.`]);
+ L.push(["Mercado",dI>3?`Ibovespa sobe ${fmt(dI,1)}% com otimismo sobre a economia.`:dI<-3?`Bolsa recua ${fmt(-dI,1)}% e investidores pedem sinais de responsabilidade fiscal.`:"Bolsa fecha o mês de lado, aguardando decisões do governo."]);
+ L.push(["Emprego",`Caged registra ${Math.round((S.g-1.6)*35+rnd()*15)} mil vagas formais no mês. Desemprego em ${fmt(S.u,1)}%.`]);
+ L.push(["Contas públicas",pr<-1?`Rombo primário de ${fmt(-pr)}% do PIB preocupa o mercado; dívida em ${fmt(S.div,1)}% do PIB.`:pr>0?`Governo consegue superávit primário de ${fmt(pr)}% do PIB. Dívida em ${fmt(S.div,1)}%.`:`Resultado primário perto do equilíbrio (${fmt(pr)}% do PIB). Dívida em ${fmt(S.div,1)}%.`]);
+ L.push(["Política",S.pop<30?"Aprovação do governo despenca e aliados cobram mudança de rumo na economia.":S.pop>55?"Pesquisa mostra alta na aprovação e reforça a base no Congresso.":"Congresso segue dividido sobre a agenda econômica do ministro."]);
+ evs.forEach(e=>L.push(["Urgente",e]));
+ const mm=(S.m+10)%12;S.news.unshift({h:`${M[mm]}/${2026+Math.floor((S.m+10)/12)}`,l:L});S.news=S.news.slice(0,6);
+}
+const EV=[["Choque de petróleo: barril sobe e combustíveis pressionam a inflação.",w=>{w.P+=.25;w.C+=.02}],["Desaceleração da China derruba commodities e reduz exportações.",w=>{w.G-=.4;w.C+=.03}],["Fed sinaliza juros altos por mais tempo: fuga para o dólar.",w=>{w.C+=.05}],["Quebra de safra por clima: alimentos ficam mais caros.",w=>{w.P+=.3;w.G-=.2}],["Supersafra derruba preços de alimentos.",w=>{w.P-=.25;w.G+=.2}],["Rombo do INSS maior que o previsto abre pressão no orçamento.",w=>{w.F+=.15}],["Fluxo de investimento estrangeiro em energia limpa anima o setor.",w=>{w.G+=.4;w.C-=.03}],["Ruído político em Brasília eleva a desconfiança do mercado.",w=>{w.R+=.06}]];
+function turn(){
+ if(S.over)return;
+ const w={P:0,G:0,C:0,F:0,R:0},ng=+$("g").value,nc=+$("c").value,press=+$("p").value,ni=+$("i").value,ln=[];
+ if(nc>S.carga+.15){if(R()<.3+(50-S.pop)/200)ln.push("O Congresso derrubou o aumento de impostos.");else{S.carga=nc;S.pop-=1.5}}else S.carga=nc;
+ if(ng<S.gasto-.3){if(R()<.25)ln.push("Corte de gastos barrado por parlamentares.");else{S.gasto=ng;S.pop-=1}}else S.gasto=ng;
+ S.inv=ni;
+ Q=[];S.neg={};S.em=+$("em").value;S.cp=Math.min(100,S.cp+6+(S.pop>50?2:0));PARTIES.forEach((p,j)=>{S.rel[j]=cl(S.rel[j]+(50-S.rel[j])*.05+p.f*(S.em-2)*.8+(S.pop-45)/60+rnd()*.5,0,100)});
+ const evs=[];if(R()<.2){const e=pick(EV);e[1](w);evs.push(e[0])}
+ for(const x of S.mods){if(x.rj>.3&&!x.ll){const age=S.m-x.t0;if(age>=1&&age<=4&&R()<x.rj*.1){x.ll=1;x.dur=Math.max(0,age-x.dl);evs.push(`Liminar do STF suspende os efeitos de “${x.ti}”.`)}}}
+ const md=MOD(),pr0=prim();
+ S.prem=cl(S.prem*.96+.04*(1+.5*Math.max(0,-pr0-.3)+.02*(S.div-78))+.02*press+w.R+md.prem+rnd()*.01,.8,2.2);
+ const alvoC=5.3*(1+.5*(S.prem-1))-.05*(S.selic-13.75)+w.C*5,c0=S.cambio;
+ S.cambio=cl(c0+(alvoC-c0)*.25+rnd()*.08,3.5,10);const dC=(S.cambio/c0-1)*100;
+ S.exp=cl(S.exp+.1*(ipca12()-S.exp)+.03*press,2.5,12);
+ const pm=cl(.31+.05*(S.g-2)+.12*dC+.04*(S.exp-4.5)+w.P+md.p+rnd()*.08,-.3,2);
+ S.ipm.shift();S.ipm.push(pm);{const r={al:.3+w.P*1.3+rnd()*.25,adm:.28+md.p*2+w.P*.6+rnd()*.12,srv:.34+.06*(S.g-2)+rnd()*.08,ind:.25+.1*dC+rnd()*.1},W={al:.22,adm:.27,srv:.35,ind:.16},t=Object.keys(W).reduce((a,q)=>a+W[q]*r[q],0),f=Math.abs(t)>.05?pm/t:1;for(const q in W){S.ic[q].shift();S.ic[q].push(r[q]*f)}}
+ const lag=S.sl.shift();S.sl.push(S.selic);
+ const alvoG=2.2+.7*(S.gasto-19)-.45*(S.carga-18.8)+.5*(S.inv-1.2)-.3*(lag-S.exp-8)-.5*(S.prem-1)+w.G+md.g;
+ S.g=cl(S.g+(alvoG-S.g)*.15+rnd()*.08,-6,8);
+ S.u=cl(S.u-.06*(S.g-2.2)+rnd()*.03,3.2,16);
+ const i=ipca12();let mv=null;
+ const alvoS=S.exp+7.5+(i-3.5)+.5*(S.prem-1)-.5*press,d=alvoS-S.selic;
+ if(S.m%2===1){mv=0;if(Math.abs(d)>1.2)mv=.5*Math.sign(d);else if(Math.abs(d)>.4)mv=.25*Math.sign(d);S.selic=cl(S.selic+mv,2,26)}
+ const pr=prim();
+ S.div=cl(S.div*(1+S.selic/1200)/(1+(S.g+i)/1200)-pr/12+w.F/12,40,200);
+ const ib0=S.ibov;S.ibov=Math.max(20,S.ibov*(1+.006*(S.g-2)-.004*(S.selic-13.75)-.05*(S.prem-1)/4+rnd()*.035));const dI=(S.ibov/ib0-1)*100;
+ S.res=cl(S.res+(S.cambio<5?-1:1)*.5,100,500);
+ const alvoP=62-4*(i-3)-2.2*(S.u-6)+3*(S.g-2)-2*(S.carga-18.8)+.3*(S.gasto-19)+md.pop;
+ S.pop=cl(S.pop+(alvoP-S.pop)*.15+rnd()*.8,5,90);
+ S.hist.push({i,s:S.selic,u:S.u,c:S.cambio,g:S.g,d:S.div,r:pr,p:S.pop});if(S.hist.length>24)S.hist.shift();
+ news(pm,dC,dI,mv,evs,pr);
+ ln.push(...(S.pend||[]));S.pend=[];if(ln.length)S.news[0].l.push(["Congresso",ln.join(" ")]);
+ S.m++;S.ai=0;
+ if(S.pop<10&&S.m>3){S.over=true;S.news[0].l.unshift(["Urgente","Pressão popular e política forçam a sua demissão."])}
+ if(S.m>=24)end(i);
+ save();render();tab(3);say("Mês fechado. Veja as notícias.");
+}
+function end(i){
+ S.over=true;let sc=cl(30-Math.abs(i-3)*8,0,30)+cl(25-(S.u-5)*4,0,25)+cl(20+S.g*5,0,20)+cl(25-(S.div-70)*1.2,0,25)+S.pop/5;
+ sc=Math.round(cl(sc,0,100));const n=sc>=80?"A: histórico":sc>=65?"B: bom ministro":sc>=50?"C: mandato mediano":sc>=35?"D: fraco":"E: desastre";
+ S.news[0].l.unshift(["Fim do mandato",`Nota ${sc}/100 (${n}). IPCA ${fmt(i)}%, desemprego ${fmt(S.u,1)}%, dívida ${fmt(S.div,1)}% do PIB, aprovação ${Math.round(S.pop)}%.`]);
+ $("go").disabled=true;$("go").textContent="Mandato encerrado";
+}
+const esc=s=>String(s||"").replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+function chatHTML(){return S.chat.map((c,i)=>{if(c.w)return '<div class="msg">Gabinete analisando...</div>';if(c.me)return `<div class="msg me">${c.t}</div>`;if(!c.prop)return `<div class="msg">${c.t}</div>`;
+ const v=votar(c.tp,c.l,1),v2=votar(c.tp,c.l,1,1),ok=c.tp==="Exec"||(v.y>=v.need&&v2.y>=v2.need),rc={enviar:["ok","Recomendado"],ajustar:["","Ajustar antes"],barrar:["bad","Não recomendado"]}[c.rec];
+ let h=`<div class="msg"><b>${c.ti}</b> <span class="tag">${c.tp}</span> <b class="${rc[0]}">${rc[1]}</b><br>${c.rs}<br><span class="mut">${c.pa.fiscal}<br>${c.pa.politico}<br>⚖${c.pa.juridico}<br>${c.pa.mercado}</span><br><span class="mut">Placar projetado: <b class="${ok?"ok":"bad"}">${c.tp==="Exec"?"sem votação":"Câmara "+v.y+"/"+v.need+" · Senado "+v2.y+"/"+v2.need}</b> · risco jurídico ${Math.round(c.rj*100)}%</span>${impacto(c.ef,c.dl,c.du)}`;
+ if(c.s==="p"){const lb={enviar:"Enviar ao Congresso",ajustar:"Enviar mesmo assim",barrar:"Manter mesmo assim"}[c.rec];h+=`<div class="row"><button class="${c.rec==="enviar"?"p":"s"}" data-ai="send" data-i="${i}">${lb}</button>${c.alr?`<button class="s" data-ai="alt" data-i="${i}">Usar alternativa</button>`:""}<button class="s" data-ai="drop" data-i="${i}">Descartar</button></div><div class="mut">${c.rec==="enviar"?"Custa 8 de capital político.":"Insistir custa 14 de capital político, abala a credibilidade e eleva o risco jurídico."}</div>`}
+ else if(c.s==="v")h+=`<div class="row"><button class="p" data-ai="vote">Ir à votação ▶</button></div><div class="mut">Na pauta do plenário.</div>`;else h+=`<div class="mut"><i>${c.s==="e"?c.res:"Descartada."}</i></div>`;
+ return h+"</div>"}).join("")}
+async function sendAI(){
+ const t=$("tx").value.trim();if(!t||!canAsk()||S.ai>=3||S.over)return;
+ S.ai++;S.chat.push({me:1,t:esc(t)},{w:1});$("tx").value="";$("send").disabled=true;render();
+ const base=PARTIES.reduce((a,p,j)=>a+(S.rel[j]>=60?p.s:0),0);
+ const st=`Selic ${fmt(S.selic)}%, IPCA 12m ${fmt(ipca12())}%, dólar R$ ${fmt(S.cambio)}, PIB ${fmt(S.g,1)}% a.a., desemprego ${fmt(S.u,1)}%, dívida ${fmt(S.div,1)}% do PIB, primário ${fmt(prim())}% do PIB, aprovação ${Math.round(S.pop)}%, prêmio de risco ${fmt(S.prem,2)}, base aliada ${base} de 513 deputados, capital político ${Math.round(S.cp)}.`;
+ const pm=`Você é o gabinete do Ministro da Fazenda do Brasil num simulador realista. Responda SOMENTE um JSON, sem markdown. Seja BREVE: cada parecer tem no máximo 15 palavras e o resumo no máximo 25.
+Situação: ${st}
+Proposta do ministro (texto livre, pode ser ruim, absurda ou incompleta): "${t}"
+Quatro assessores opinam: fiscal (Tesouro), politico (articulação com o Congresso), juridico (AGU), mercado (economista-chefe). Seja honesto e técnico. Se a medida for ruim, diga e modele o impacto real negativo nos efeitos; nunca suavize para agradar. Use defasagens e magnitudes realistas e conservadoras.
+Formato: {"titulo":"curto","tipo":"PL, PLP, PEC, MP ou Exec (Exec = ato do Executivo, sem votação)","alinhamento":-1 a 1 (-1 estatista, 1 liberal),"recomendacao":"enviar, ajustar ou barrar","resumo":"...","pareceres":{"fiscal":"...","politico":"...","juridico":"...","mercado":"..."},"alternativa":"versão melhor da proposta em uma frase, ou vazio","risco_juridico":0 a 1,"custo_credibilidade":0 a 1,"pop_agora":-6 a 6,"atraso_meses":0 a 12,"duracao_meses":1 a 36,"efeitos_mensais":{"g":-1.5 a 1.5 (pontos de PIB anual),"p":-0.15 a 0.15 (pontos de inflação mensal),"prim":-1.5 a 1.5 (pontos de % PIB no primário),"prem":-0.3 a 0.3,"pop":-3 a 3}}`;
+ try{
+  const r=await ask(pm),e=r.efeitos_mensais||{},ef={},pa=r.pareceres||{};
+  for(const k in B)ef[k]=cl(+e[k]||0,-B[k],B[k]);
+  S.chat=S.chat.filter(c=>!c.w);
+  S.chat.push({prop:1,s:"p",ti:esc(r.titulo),tp:TH[r.tipo]!==undefined?r.tipo:"PL",l:cl(+r.alinhamento||0,-1,1),ef,dl:cl(Math.round(+r.atraso_meses||0),0,12),du:cl(Math.round(+r.duracao_meses||1),1,36),rj:cl(+r.risco_juridico||0,0,1),cr:cl(+r.custo_credibilidade||0,0,1),pn:cl(+r.pop_agora||0,-6,6),rec:["enviar","ajustar","barrar"].includes(r.recomendacao)?r.recomendacao:"ajustar",rs:esc(r.resumo),pa:{fiscal:esc(pa.fiscal),politico:esc(pa.politico),juridico:esc(pa.juridico),mercado:esc(pa.mercado)},alr:String(r.alternativa||"").slice(0,300)});
+ }catch(x){S.ai--;S.chat=S.chat.filter(c=>!c.w);S.chat.push({t:"O gabinete não conseguiu responder agora. Tente de novo."})}
+ S.chat=S.chat.slice(-10);save();render();
+}
+function enviar(i){const c=S.chat[i];if(!c||c.s!=="p"||S.over)return;const forced=c.rec!=="enviar",cost=forced?14:8;if(S.cp<cost){say(`Capital político insuficiente (precisa de ${cost}).`);return}
+ S.cp-=cost;S.prem=cl(S.prem+.1*c.cr*(forced?1.5:.6),.8,2.2);S.exp=cl(S.exp+.3*c.cr*(forced?1.5:.5),2.5,12);if(forced)S.pop=cl(S.pop-1,5,90);
+ c.id=Date.now()+i;c.s="v";S.pauta.push({k:"ai",id:c.id});say("Proposta na pauta. Toque em “Ir à votação”.");save();render()}
+function tab(n){document.querySelectorAll(".tab").forEach((e,j)=>e.classList.toggle("on",j===n));document.querySelectorAll("nav button").forEach((e,j)=>e.classList.toggle("on",j===n));scrollTo(0,0)}
+$("nav").addEventListener("click",e=>{const b=e.target.closest("button");if(b)tab(+b.dataset.t)});
+$("pj").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.v){VW=VW===+b.dataset.v?0:+b.dataset.v;render();return}const id=+b.dataset.p;if(S.pauta.some(x=>x.k==="pj"&&x.id===id))return;if(S.cp<10){say("Capital político insuficiente. Negocie na aba Câmara ou espere o próximo mês.");return}S.cp-=10;S.pauta.push({k:"pj",id});say("Projeto enviado ao Congresso. Toque em “Ir à votação”.");save();render()});
+["g","c","i","p","em"].forEach(id=>$(id).addEventListener("input",render));
+$("em").value=S.em;$("cong").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const j=+b.dataset.n,P=PARTIES[j];if(S.neg[j]){say("Você já negociou com este partido neste mês.");return}
+ if(b.dataset.a==="c"){if(S.cp<5){say("Capital político insuficiente.");return}S.cp-=5;const g=3+3*(1-P.f);S.rel[j]=cl(S.rel[j]+g,0,100);say(`${P.l} recebeu você. Relação +${fmt(g,1)}.`)}else{S.mods.push({t0:S.m,dl:0,dur:3,e:{prim:-.04}});const g=4+9*P.f;S.rel[j]=cl(S.rel[j]+g,0,100);say(`Emenda dirigida ao ${P.n}: relação +${fmt(g,1)}. Custo de R$ 1,5 bi.`)}
+ S.neg[j]=1;save();render()});$("g").value=S.gasto;$("c").value=S.carga;$("i").value=S.inv;$("p").value=0;
+$("chat").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||!b.dataset.ai)return;const i=+b.dataset.i,c=S.chat[i];if(b.dataset.ai==="send")enviar(i);else if(b.dataset.ai==="vote")votarPauta();else if(b.dataset.ai==="drop"){c.s="d";save();render()}else{$("tx").value=c.alr;say("Alternativa no campo. Envie para analisar.")}});$("pauta").addEventListener("click",e=>{if(e.target.closest("button"))votarPauta()});$("ksv").onclick=()=>{KEY=$("key").value.trim();try{localStorage.setItem("mmk",KEY)}catch(e){}say(KEY?"Chave salva neste navegador.":"Chave removida.");render()};$("go").onclick=()=>S.pauta.some(x=>(x.at||0)<=S.m)?votarPauta():turn();$("send").onclick=sendAI;
+if(window.claude&&claude.use){
+ claude.use("sample").then(s=>{sample=s;render()}).catch(()=>{});
+ claude.use("dictation").then(d=>{if(!d)return;dict=d;$("mic").style.display="";d.onFinal(({text})=>{$("tx").value+=(($("tx").value?" ":"")+text)});d.onState(({state})=>{$("mic").textContent=state==="listening"?"⏹ Parar":"Ditar"});$("mic").onclick=()=>{$("mic").textContent==="⏹ Parar"?dict.stop():dict.start().catch(()=>{})}}).catch(()=>{});
+}
+if(S.over)$("go").disabled=true;
+render();
+</script>
+<script>
+(()=>{
+Object.assign(S,Object.assign({dif:1,crise:null,brk:0,pres:70,ach:[],rt:4},S));
+PJ.push(
+{id:9,tp:"PLP",l:-.3,n:"Isenção do IR até R$ 5 mil, compensada por taxar altas rendas",d:"Mais renda disponível e aprovação; compensa parte da perda com os super-ricos.",pop:3,e:{g:.25,prim:-.12,p:.02},dl:3,dur:999},
+{id:10,tp:"PL",l:.6,n:"Concessões de rodovias e portos",d:"Atrai capital privado e eleva o PIB a médio prazo.",pop:-.5,e:{g:.3,prim:.08,prem:-.01},dl:6,dur:999},
+{id:11,tp:"PEC",l:.5,n:"Desvinculação de receitas orçamentárias",d:"Dá flexibilidade ao orçamento e melhora o primário, com desgaste.",pop:-2,e:{prim:.35,prem:-.015},dl:6,dur:999},
+{id:12,tp:"PL",l:-.6,n:"Ampliação do Bolsa Família",d:"Eleva consumo e aprovação, mas pressiona as contas.",pop:4,e:{g:.2,p:.03,prim:-.25},dl:1,dur:999},
+{id:13,tp:"PL",l:.1,n:"Taxação de apostas online (bets)",d:"Receita extra com baixo custo político.",pop:0,e:{prim:.12},dl:2,dur:999},
+{id:14,tp:"PLP",l:.7,n:"Teto para supersalários do funcionalismo",d:"Economia moderada, com resistência corporativa.",pop:-1,e:{prim:.15,prem:-.01},dl:5,dur:999});
+const A=(k,v,a,b)=>{S[k]=cl(S[k]+v,a,b)},P=v=>A("prem",v,.8,2.2),O=v=>A("pop",v,5,90),mo=(e,dl,dur,ti)=>S.mods.push({t0:S.m,dl,dur,e,rj:0,ti});
+const CR=[
+{t:"Greve dos caminhoneiros",d:"Rodovias bloqueadas em 12 estados. Supermercados já sentem falta de produtos.",o:[["Subsidiar o diesel (R$ 8 bi)",()=>{mo({p:-.08,prim:-.35},0,3,"Subsídio ao diesel");O(2)}],["Negociar sem ceder",()=>{mo({g:-.3,p:.06},0,2,"Efeito da greve");O(-3)}],["Acionar a força de segurança",()=>{P(.05);O(-1)}]]},
+{t:"Ataque especulativo contra o real",d:"O dólar sobe 4% em dois dias e fundos apostam contra o câmbio.",o:[["Vender US$ 15 bi de reservas",()=>{A("res",-15,100,500);S.cambio*=.96}],["Pedir swaps ao Banco Central",()=>{S.cambio*=.98;P(.03)}],["Deixar o câmbio flutuar",()=>{S.cambio*=1.06;mo({p:.07},0,3,"Repasse cambial")}]]},
+{t:"Agência de rating ameaça rebaixar",d:"Relatório cita trajetória fiscal frágil. O mercado cobra um sinal.",o:[["Anunciar corte de R$ 30 bi",()=>{mo({prim:.3,g:-.1},0,12,"Corte de R$ 30 bi");P(-.08);O(-2)}],["Ignorar e defender o governo",()=>P(.12)]]},
+{t:"Enchentes no Sul",d:"Calamidade em dezenas de cidades. Governadores pedem recursos fora da meta.",o:[["Crédito extraordinário fora da meta",()=>{mo({prim:-.5},0,4,"Crédito extraordinário");O(3);P(.04)}],["Realocar dentro do orçamento",()=>{mo({g:-.1},0,3,"Realocação");O(1)}]]},
+{t:"O presidente quer mais gasto",d:"O Planalto cobra um programa social novo antes da próxima pesquisa.",o:[["Ceder",()=>{S.gasto=cl(S.gasto+.3,17,23);O(3);A("pres",8,0,100)}],["Resistir publicamente",()=>{A("pres",-10,0,100);P(-.05)}],["Propor meio-termo (10 PC)",()=>{A("cp",-10,0,100);A("pres",2,0,100)}]]},
+{t:"Governadores pedem renegociar dívidas",d:"Estados ameaçam reduzir serviços sem alívio nas parcelas.",o:[["Conceder alívio",()=>{mo({prim:-.2},0,6,"Alívio a estados");PARTIES.forEach((p,j)=>S.rel[j]=cl(S.rel[j]+3,0,100))}],["Negar e manter o regime",()=>{PARTIES.forEach((p,j)=>S.rel[j]=cl(S.rel[j]-3,0,100));P(-.02)}]]},
+{t:"Vazamento de conversa com investidores",d:"Um trecho fora de contexto viraliza e a oposição pede a sua cabeça.",o:[["Pedir desculpas em coletiva",()=>{O(-1);A("cp",-5,0,100)}],["Desmentir com firmeza",()=>{O(-3);A("pres",-3,0,100)}]]}];
+const cr=$("cr");
+function crisis(){const c=CR[S.crise];if(!c||S.over){cr.hidden=true;return}cr.hidden=false;cr.innerHTML=`<div class="bx"><h3>Crise no gabinete</h3><h2>${c.t}</h2><p>${c.d}</p>${c.o.map((o,k)=>`<button class="${k?"s":"p"}" data-k="${k}">${o[0]}</button>`).join("")}<div class="mut" style="margin-top:8px">Decida agora: o mercado não espera.</div></div>`}
+cr.onclick=e=>{const b=e.target.closest("button");if(!b)return;const c=CR[S.crise],o=c.o[+b.dataset.k];o[1]();S.pend.push(`${c.t}: você optou por “${o[0]}”.`);S.crise=null;save();say("Decisão tomada.");render()};
+const RT=["CCC","B","B+","BB-","BB","BB+","BBB-","BBB","A-"],rsc=()=>100-(S.div-60)*1.2-Math.max(0,-prim())*12-(S.prem-1)*30+(S.res-300)/20,rti=()=>cl(Math.floor((rsc()-35)/9),0,8);
+const ACH=[["pouso","Pouso suave: IPCA na meta e desemprego abaixo de 6% após 12 meses",()=>S.m>=12&&ipca12()<4.5&&ipca12()>1.5&&S.u<6],["gi","Grau de investimento",()=>rti()>=6],["sup","Superávit primário",()=>prim()>.2],["pop"," Aprovação acima de 60%",()=>S.pop>60],["usd","Dólar abaixo de R$ 5",()=>S.cambio<5],["arc","Um ano dentro da meta fiscal",()=>S.m>=12&&S.brk===0],["sob","Sobrevivente: 24 meses no cargo",()=>S.m>=24&&S.pop>=10&&S.pres>=15]];
+function extra(){const e=$("ext");if(!e)return;const i=rti(),b=4+(S.cambio-5)*2.2-(S.g-2)*.5,ic=cl(100+8*(S.g-2)-15*(S.prem-1)-(S.selic-13.75)+(S.pop-45)/5,50,150);
+e.innerHTML=`<div class="grid"><div class="k ${i<4?"al":""}"><span>Rating soberano</span><b class="${i<4?"bad":i>=6?"ok":""}">${RT[i]}</b><span>${i>=6?"Grau de investimento":"Grau especulativo"}</span></div><div class="k ${S.pres<30?"al":""}"><span>Confiança do presidente</span><b>${Math.round(S.pres)}%</b><div class="bar"><i style="width:${S.pres}%"></i></div></div><div class="k"><span>Balança comercial</span><b>US$ ${fmt(b,1)} bi/mês</b><span>Estimativa</span></div><div class="k"><span>Confiança do empresário</span><b>${Math.round(ic)}</b><span>100 = neutro</span></div></div><div class="mut" style="margin-top:8px">Meta fiscal (primário perto de zero, tolerância de 0,25 pp): descumprida em <b class="${S.brk?"bad":"ok"}">${S.brk}</b> mês(es). Se o presidente perder a confiança, você cai.</div><div class="hd">Conquistas (${S.ach.length}/${ACH.length})</div>`+ACH.map(a=>`<div class="nw" style="opacity:${S.ach.includes(a[0])?1:.35}">${a[1]}</div>`).join("")}
+const R0=render;render=function(){R0();extra();crisis();try{hud()}catch(x){}};
+const T0=turn;turn=function(){const m0=S.m;if(S.over||S.crise)return;T0();if(S.m===m0||!S.news[0])return;
+ const L=S.news[0].l,pr=prim(),i=rti();
+ if(pr<-.25){S.brk++;P(.025);L.push(["Arcabouço",`Meta fiscal descumprida: primário de ${fmt(pr)}% do PIB. O mercado cobra correção.`])}
+ if(i!==S.rt){const up=i>S.rt;P(up?-.06:.1);if(!up)S.cambio*=1.02;L.push(["Rating",`Agência ${up?"eleva":"rebaixa"} a nota do Brasil para ${RT[i]}.`]);S.rt=i}
+ A("pres",(S.pop-45)/25-Math.max(0,-pr-.4)*2,0,100);A("cp",(S.pres-50)/25,0,100);
+ ACH.forEach(a=>{if(!S.ach.includes(a[0])&&a[2]()){S.ach.push(a[0]);L.push(["Conquista",a[1]])}});
+ if(S.pres<15&&S.m>3&&!S.over){S.over=true;L.unshift(["Urgente","O presidente perde a confiança e anuncia o seu substituto."])}
+ if(S.m>=24)L.unshift(["Legado",`Rating final ${RT[i]}, ${S.ach.length}/${ACH.length} conquistas, ${S.brk} mês(es) fora da meta fiscal.`]);
+ if(!S.over&&R()<.22*S.dif)S.crise=Math.floor(R()*CR.length);
+ try{navigator.vibrate&&navigator.vibrate(30)}catch(x){}
+ save();render()};
+const nz=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+const RU=[
+[/(imprim|emiss|calote|confisc|congel|tabel|estatiz)/,0,{ti:"Medida heterodoxa de alto risco",tp:"MP",al:-.8,rec:"barrar",rs:"Intervenção direta que mercado e Justiça tendem a rejeitar.",f:"Destrói credibilidade e encarece a dívida.",j:"Alto risco de inconstitucionalidade e liminar.",m:"Fuga de capital e dólar em alta.",alt:"Agir sobre a oferta com medidas pontuais e transparentes.",rj:.8,cr:.9,pn:1,dl:0,du:6,ef:{g:-.4,p:.1,prim:-.3,prem:.2,pop:-.5}}],
+[/(banco central|selic|juros|copom)/,/(press|forc|obrig|baix|cort|reduz|derrub)/,{ti:"Pressão por queda de juros",tp:"Exec",al:-.5,rec:"barrar",rs:"Interferir no BC derruba a credibilidade e eleva a inflação esperada.",f:"Juro menor agora, dívida mais cara depois.",j:"Autonomia do BC é lei; risco de contestação.",m:"Expectativas desancoram e o prêmio de risco sobe.",alt:"Atacar o déficit para abrir espaço à queda de juros.",rj:.3,cr:.8,pn:.5,dl:0,du:6,ef:{g:.15,p:.08,prem:.15,pop:.3}}],
+[/(cambio|dolar|reserva)/,0,{ti:"Intervenção cambial",tp:"Exec",al:0,rec:"ajustar",rs:"Alivia o câmbio no curto prazo, mas gasta reservas.",f:"Gasta reservas sem atacar a causa do câmbio.",j:"Sem obstáculo jurídico relevante.",m:"Efeito temporário se o fiscal não melhorar.",alt:"Combinar swaps cambiais com sinal fiscal.",rj:.05,cr:.2,pn:0,dl:0,du:2,ef:{prem:-.02,p:-.02}}],
+[/(privatiz|concess|venda de estatal|desestatiz)/,0,{ti:"Programa de privatizações e concessões",tp:"PL",al:.8,rec:"enviar",rs:"Reduz dívida e atrai investimento, com resistência política.",f:"Receita pontual e menos subsídio a estatais.",j:"Editais e licitações exigem rito rigoroso.",m:"Sinal positivo para investidores.",alt:"Começar por concessões de infraestrutura.",rj:.15,cr:.1,pn:-2,dl:4,du:36,ef:{g:.2,prim:.15,prem:-.03}}],
+[/(cort|reduz|enxug|conter|congel)/,/(gasto|despesa|custeio|folha|desperd)/,{ti:"Corte de despesas",tp:"PLP",al:.6,rec:"enviar",rs:"Melhora o primário e o risco-país, com desgaste político.",f:"Melhora o primário e a trajetória da dívida.",j:"Risco baixo se preservar pisos constitucionais.",m:"Mercado reage bem a cortes críveis.",alt:"Cortar custeio e benefícios mal focalizados, preservando saúde e educação.",rj:.15,cr:.05,pn:-3,dl:2,du:36,ef:{g:-.2,prim:.4,prem:-.03,pop:-.3}}],
+[/(zer|reduz|cort|diminu|isen|deson|baix|elimin|suspend)/,/(imposto|tribut|aliquota|taxa|contribuic)/,{ti:"Redução de tributos",tp:"PL",al:.4,rec:"ajustar",rs:"Estimula a economia, mas abre buraco na arrecadação.",f:"Perda de receita sem compensação piora o primário.",j:"Exige estimativa de impacto e compensação.",m:"Positivo se vier com compensação.",alt:"Reduzir o imposto com compensação por corte de benefícios.",rj:.2,cr:.15,pn:2,dl:2,du:12,ef:{g:.3,prim:-.3,p:-.01,prem:.01}}],
+[/(aument|elev|cri|tribut|taxa|cobrar|novo imposto)/,/(imposto|tribut|aliquota|contribuic|taxa)/,{ti:"Aumento de tributos",tp:"PL",al:-.4,rec:"ajustar",rs:"Reforça a arrecadação, mas custa crescimento e popularidade.",f:"Ajuda o primário, mas reduz a atividade.",j:"Atenção à anterioridade tributária.",m:"Prefere corte de gasto a mais imposto.",alt:"Tributar alta renda e reduzir isenções, sem afetar o consumo.",rj:.2,cr:.15,pn:-3,dl:3,du:36,ef:{g:-.25,prim:.35,p:.02,pop:-.5}}],
+[/(combustivel|gasolina|diesel|gas de cozinha|energia|tarifa)/,0,{ti:"Alívio em combustíveis e tarifas",tp:"MP",al:-.3,rec:"ajustar",rs:"Freia a inflação por alguns meses e custa receita.",f:"Renúncia de receita temporária.",j:"MP exige urgência justificada.",m:"Efeito curto; distorce preços.",alt:"Limitar a desoneração a 6 meses.",rj:.2,cr:.1,pn:2,dl:0,du:6,ef:{p:-.1,prim:-.2,pop:.3}}],
+[/(salario minimo|aumento real|reajuste)/,0,{ti:"Aumento real do salário mínimo",tp:"PL",al:-.8,rec:"ajustar",rs:"Sustenta consumo e aprovação, mas pressiona gastos e preços.",f:"Eleva benefícios indexados.",j:"Sem obstáculos.",m:"Preocupa com inflação de serviços.",alt:"Regra de ganho real atrelada ao crescimento.",rj:.05,cr:.15,pn:3,dl:0,du:36,ef:{g:.2,p:.04,prim:-.2}}],
+[/(credito|financiamento|habitac|pequena|micro|empres|investimento|inov)/,0,{ti:"Programa de crédito e estímulo",tp:"MP",al:-.3,rec:"ajustar",rs:"Impulsiona o PIB por um ano, com custo fiscal moderado.",f:"Subsídio implícito pesa no primário.",j:"Risco baixo.",m:"Neutro; teme efeito sobre a inflação.",alt:"Focar em crédito para investimento produtivo.",rj:.1,cr:.1,pn:2,dl:2,du:12,ef:{g:.35,p:.03,prim:-.15}}],
+[/(bolsa|auxilio|beneficio|programa social|subsidio|transferencia|gastar|gasto)/,0,{ti:"Ampliação de gasto social",tp:"PL",al:-.6,rec:"ajustar",rs:"Eleva renda e aprovação, mas piora as contas e o risco-país.",f:"Gasto permanente sem fonte de receita.",j:"Exige compensação pela lei fiscal.",m:"Dívida em alta aumenta o prêmio de risco.",alt:"Ampliar o gasto social com corte equivalente em outras despesas.",rj:.25,cr:.4,pn:4,dl:1,du:36,ef:{g:.35,p:.05,prim:-.4,prem:.05,pop:.5}}],
+[/(reforma|simplific|burocra|marco legal|regulat)/,0,{ti:"Reforma estrutural",tp:"PEC",al:.3,rec:"enviar",rs:"Ganho de produtividade no longo prazo, desgaste agora.",f:"Efeito fiscal pequeno e lento.",j:"Rito de PEC é longo.",m:"Sinal estrutural positivo.",alt:"Dividir a reforma em etapas.",rj:.1,cr:.05,pn:-2,dl:8,du:36,ef:{g:.4,prim:.1}}]];
+const FB={ti:"Proposta genérica",tp:"PL",al:0,rec:"ajustar",rs:"Falta detalhar instrumento, custo e prazo.",f:"Sem custo estimado, o Tesouro não mede o impacto.",j:"Risco depende do texto final.",m:"Mercado aguarda detalhes.",alt:"Reescrever com instrumento, custo em R$ e prazo.",rj:.2,cr:.2,pn:0,dl:3,du:12,ef:{g:.05,prim:-.05}};
+const loc=pm=>{const m=pm.match(/Proposta do ministro[^:]*: "([\s\S]*?)"\nQuatro/),t=nz(m?m[1]:pm),r=RU.find(x=>x[0].test(t)&&(!x[1]||x[1].test(t))),u=r?r[2]:FB,tp=u.tp,need=TH[tp],base=PARTIES.reduce((a,p,j)=>a+(S.rel[j]>=60?p.s:0),0),e={...u.ef};
+ if((e.prim||0)<0)e.prem=(e.prem||0)+Math.max(0,S.div-80)/40*.05;
+ const po=tp==="Exec"?"Ato do Executivo: sem votação, mas com custo político direto.":base>=need?`Base de ${base} deputados cobre os ${need} votos exigidos.`:`Base de ${base} deputados; faltam votos para os ${need} exigidos. Negocie antes.`;
+ return{titulo:u.ti,tipo:tp,alinhamento:u.al,recomendacao:u.rec==="enviar"&&tp!=="Exec"&&base<need-40?"ajustar":u.rec,resumo:u.rs,pareceres:{fiscal:u.f,politico:po,juridico:u.j,mercado:u.m},alternativa:u.alt,risco_juridico:u.rj,custo_credibilidade:u.cr,pop_agora:u.pn,atraso_meses:u.dl,duracao_meses:u.du,efeitos_mensais:e}};
+const A1=ask;ask=async function(pm){if(sample||KEY){try{return await A1(pm)}catch(x){}}await new Promise(r=>setTimeout(r,900));return loc(pm)};
+Object.assign(S,Object.assign({lv:{bf:0,sa:0,ed:0,sv:0,rb:0,pv:0},intro:0},S));
+const LV=[["bf","Bolsa Família","base R$ 160 bi/ano",-60,80,5,1.7,.035,1],["sa","Saúde","base R$ 250 bi/ano",-40,60,5,1.4,.02,1],["ed","Educação","base R$ 180 bi/ano",-30,50,5,1.3,.012,1],["sv","Reajuste real da folha","base R$ 410 bi/ano",0,6,.5,.9,.01,4.1],["rb","Corte de benefícios fiscais","renúncias de R$ 520 bi/ano",0,100,5,.6,.02,-1],["pv","Ajuste na Previdência","base R$ 1 tri/ano",0,60,5,.6,.05,-1]];
+const lve=()=>{const o={prim:0,g:0,p:0,pop:0};LV.forEach(l=>{const D=(S.lv[l[0]]||0)*l[8];o.prim-=D/125;o.g+=l[6]*D/125*.4;o.p+=.03*l[6]*D/125;o.pop+=l[7]*D});return o};
+const M1=MOD;MOD=function(){const o=M1(),l=lve();for(const k in l)o[k]=cl(o[k]+l[k],-B[k],B[k]);return o};
+$("lvs").innerHTML=LV.map(l=>`<label><span>${l[1]} <small class="mut">${l[2]}</small></span><b id="lb${l[0]}"></b></label><input type="range" id="lr${l[0]}" min="${l[3]}" max="${l[4]}" step="${l[5]}" value="${S.lv[l[0]]||0}">`).join("");
+function upd(){LV.forEach(l=>{const v=+$("lr"+l[0]).value,D=v*l[8];$("lb"+l[0]).textContent=l[0]==="sv"?`${v>0?"+":""}${fmt(v,1)}% real · R$ ${fmt(D,1)} bi`:`${D>0?"+":""}R$ ${Math.round(D)} bi · ${fmt(D/125,2)}% PIB`});const o=lve();$("lvt").innerHTML=`Impacto fiscal líquido: <b class="${o.prim<0?"bad":"ok"}">${o.prim>0?"+":""}${fmt(o.prim,2)}% do PIB</b> · crescimento ${o.g>0?"+":""}${fmt(o.g,2)} pp · aprovação ${o.pop>0?"+":""}${fmt(o.pop,1)} pp. 1% do PIB ≈ R$ 125 bi. Cortes na Previdência e em benefícios fiscais custam capital político todo mês.`}
+$("lvs").addEventListener("input",()=>{LV.forEach(l=>S.lv[l[0]]=+$("lr"+l[0]).value);save();upd();render()});upd();
+const CDS=()=>Math.round(cl(130+(S.prem-1)*250+(S.div-79)*3,60,900)),DI=()=>cl(S.selic+(S.prem-1)*4-1.2+(S.exp-4.5)*.3,5,24);
+function hud(){const i=ipca12(),pr=prim(),sc=Math.round(cl(cl(30-Math.abs(i-3)*8,0,30)+cl(25-(S.u-5)*4,0,25)+cl(20+S.g*5,0,20)+cl(25-(S.div-70)*1.2,0,25)+S.pop/5,0,100)),pt=sc>=80?"Lenda":sc>=65?"Estadista":sc>=50?"Técnico":sc>=35?"Aprendiz":"Em risco";
+$("hud").innerHTML=`<div class="hb"><i style="width:${Math.min(S.m,24)/24*100}%"></i></div><span class="hp">${sc} · ${pt}</span>`;
+const ms=[["IPCA na meta (1,5 a 4,5%)",i<=4.5&&i>=1.5],["Dívida abaixo de 80% do PIB",S.div<80],["Desemprego abaixo de 6%",S.u<6],["Aprovação de 45% ou mais",S.pop>=45],["Grau de investimento",rti()>=6],["Meta fiscal respeitada",pr>=-.25]],n=ms.filter(x=>x[1]).length;
+$("ext2").innerHTML=`<div class="hd" style="margin-top:0">Metas do mandato · ${n}/${ms.length}</div><div class="goals">${ms.map(x=>`<span class="${x[1]?"gy":""}">${x[1]?"●":"○"} ${x[0]}</span>`).join("")}</div><div class="hd">Termômetros do mercado</div><div class="grid"><div class="k"><span>CDS 5 anos</span><b>${CDS()} pb</b><span>Risco-país</span></div><div class="k"><span>DI jan/2029</span><b>${fmt(DI())}%</b><span>Juro futuro</span></div></div><div style="height:10px"></div>`}
+const T2=turn;turn=function(){if(S.over||S.crise)return;const b={prem:S.prem,exp:S.exp,cambio:S.cambio,pop:S.pop},m0=S.m;T2();if(S.m===m0||!S.news[0])return;
+ const L=S.news[0].l,pr=prim(),dP=S.prem-b.prem,dB=Math.round(dP*400+(S.exp-b.exp)*25),dC=(S.cambio/b.cambio-1)*100,lv=S.lv;
+ L.push(["Mesa de operações",`Juros futuros ${dB>=0?"abrem":"fecham"} ${Math.abs(dB)} pontos-base no vértice de 2029 (DI a ${fmt(DI())}%). CDS de 5 anos em ${CDS()} pontos.`]);
+ if(dP>.05)L.push(["Mercado",`Prêmio de risco sobe e analistas citam dúvida sobre a trajetória da dívida (${fmt(S.div,1)}% do PIB). Investidores pedem sinal fiscal do ministro.`]);
+ else if(dP<-.05)L.push(["Mercado","Percepção de risco melhora e estrangeiros voltam a comprar títulos públicos."]);
+ if(dC>3)L.push(["Câmbio",`Fuga para o dólar: real perde ${fmt(dC,1)}% no mês. Importadores e empresas com dívida em dólar sentem o golpe.`]);
+ if(lv.bf>30)L.push(["Mercado","Gasto social permanente sem fonte de receita preocupa a mesa: economistas falam em pressão sobre a regra fiscal."]);
+ if(lv.rb>40)L.push(["Setor produtivo","Entidades da indústria e do comércio reagem ao corte de benefícios fiscais e ameaçam segurar investimentos e vagas."]);
+ if(lv.pv>20)L.push(["Sindicatos","Centrais sindicais convocam ato contra o ajuste na Previdência. Aliados no Congresso pedem recuo."]);
+ if(lv.sv>2)L.push(["Mercado","Reajuste real da folha eleva despesas obrigatórias; analistas veem engessamento do orçamento."]);
+ L.push(["Imprensa",pr<-.5?`Editoriais cobram âncora fiscal crível: déficit de ${fmt(-pr)}% do PIB não fecha a conta.`:S.pop>55?"Governo colhe dividendos de popularidade e a oposição muda o tom das críticas.":S.u>8?`Desemprego de ${fmt(S.u,1)}% domina o debate e pressiona o ministro.`:"Debate econômico segue polarizado entre ajuste fiscal e estímulo."]);
+ L.push(["Pesquisa",`Aprovação do governo em ${Math.round(S.pop)}% (margem de 2,2 pp), ${S.pop>=b.pop?"alta":"queda"} de ${fmt(Math.abs(S.pop-b.pop),0)} pp no mês.`]);
+ if(S.m%3===0)L.push(["Crédito",`Inadimplência das famílias em ${fmt(cl(3.2+.25*(S.selic-13.75)+.3*(S.u-5.6),2,8),1)}% com Selic em ${fmt(S.selic)}%. Setores sensíveis ao crédito sentem o aperto.`]);
+ const cc=lv.pv*.08+lv.rb*.03;if(cc)A("cp",-cc,0,100);
+ save();render()};
+const iv=$("in");function intro(){if(S.intro||S.m>0){iv.hidden=true;return}iv.hidden=false;iv.innerHTML=`<div class="bx"><h3>Brasília · nov/2026</h3><h2>Posse no Ministério da Fazenda</h2><p>Você tem 24 meses para conduzir a economia: inflação na meta de 3% (±1,5), dívida sob controle, emprego, crescimento e apoio do Congresso e da população. Toda decisão tem defasagem, custo político e reação do mercado.</p><p class="mut">Escolha a dificuldade para tomar posse:</p><button class="s" data-d="0.6">Fácil · poucas crises</button><button class="p" data-d="1">Normal</button><button class="s" data-d="1.7">Difícil · crises frequentes</button></div>`}
+iv.onclick=e=>{const b=e.target.closest("button");if(!b)return;S.dif=+b.dataset.d;$("dif").value=S.dif;S.intro=1;save();iv.hidden=true};
+intro();
+PJ.push(
+{id:15,tp:"PLP",l:.4,n:"Revisão linear de 10% em gastos tributários",d:"Reduz renúncias de forma gradual, com resistência dos setores beneficiados.",pop:-1.5,e:{prim:.3,g:-.1},dl:4,dur:999},
+{id:16,tp:"MP",l:-.3,n:"Programa de renegociação de dívidas das famílias",d:"Alivia o endividamento e a inadimplência com custo fiscal baixo.",pop:3,e:{g:.15,prim:-.1,p:.01},dl:1,dur:6},
+{id:17,tp:"PEC",l:.3,n:"Gatilhos de contenção de despesas obrigatórias",d:"Dá previsibilidade ao arcabouço fiscal, com desgaste político alto.",pop:-2.5,e:{prim:.4,prem:-.02},dl:8,dur:999},
+{id:18,tp:"PL",l:.2,n:"Marco de garantias e recuperação de crédito",d:"Reduz o spread bancário no médio prazo.",pop:0,e:{g:.2,prem:-.01},dl:6,dur:999});
+CR.push(
+{t:"Choque no petróleo",d:"O Brent sobe 15% em duas semanas e a Petrobras pede reajuste de combustíveis.",o:[["Absorver parte do aumento (R$ 6 bi)",()=>{mo({p:-.06,prim:-.2},0,3,"Contenção de combustíveis");O(1)}],["Liberar o repasse",()=>{mo({p:.08,g:-.1},0,3,"Repasse do petróleo");O(-2)}],["Subsídio focado ao gás de cozinha",()=>{mo({prim:-.1,p:-.02},0,4,"Auxílio gás");O(1)}]]},
+{t:"Quebra de safra",d:"Estiagem derruba a produção de grãos e os alimentos disparam nos mercados.",o:[["Zerar tarifa de importação de alimentos",()=>{mo({p:-.05,prim:-.05},0,3,"Importação sem tarifa");O(1)}],["Usar estoques reguladores",()=>{mo({p:-.03,prim:-.15},0,3,"Estoques reguladores")}],["Não intervir",()=>{mo({p:.07},0,4,"Alta de alimentos");O(-2)}]]},
+{t:"Tarifaço comercial dos EUA",d:"Washington anuncia tarifa de 25% sobre produtos brasileiros. Exportadores pedem socorro.",o:[["Crédito emergencial a exportadores",()=>{mo({g:.12,prim:-.2},0,6,"Crédito a exportadores");P(.02)}],["Negociar em Washington (8 PC)",()=>{A("cp",-8,0,100);mo({g:-.05},0,3,"Tarifa parcial")}],["Retaliar",()=>{P(.06);O(2);mo({g:-.15,p:.03},0,4,"Guerra comercial")}]]},
+{t:"Greve do funcionalismo",d:"Categorias paralisam serviços e cobram reajuste acima da inflação.",o:[["Conceder reajuste",()=>{mo({prim:-.15},0,12,"Reajuste do funcionalismo");O(1)}],["Parcelar em dois anos",()=>{mo({prim:-.07},0,12,"Reajuste parcelado")}],["Manter a posição",()=>{O(-2);A("pres",-3,0,100);P(-.02)}]]});
+const score=()=>Math.round(cl(cl(30-Math.abs(ipca12()-3)*8,0,30)+cl(25-(S.u-5)*4,0,25)+cl(20+S.g*5,0,20)+cl(25-(S.div-70)*1.2,0,25)+S.pop/5,0,100));
+const snap=()=>({g:S.g,i:ipca12(),s:S.selic,u:S.u,c:S.cambio,d:S.div,p:prim(),a:S.pop,cds:CDS(),ib:S.ibov,e:S.exp,pm:S.prem,sc:score()});
+function drv(k){const t=S.mods.map(x=>[x.ti||"Medida",(x.e[k]||0)*wgt(x,S.m)]),l=lve()[k];if(l)t.push(["Orçamento detalhado",l]);return t.filter(a=>Math.abs(a[1])>.015).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,3).map(a=>`${a[0]} (${a[1]>0?"+":"−"}${fmt(Math.abs(a[1]),2)})`).join("; ")}
+function report(a,b){const rp=$("rp"),w=k=>{const x=drv(k);return x?` Medidas em vigor: ${x}.`:""},rr=b.s-b.e;
+ const W={g:`Juros reais de ${fmt(rr,1)}% ${rr>8?"travam":"ainda restringem"} crédito e investimento.${w("g")}`,i:`Câmbio ${b.c>a.c?"mais fraco":"mais forte"} (R$ ${fmt(b.c)}) e expectativas de ${fmt(b.e,1)}% ${b.e>4.5?"ainda acima":"em torno"} da meta de 3%.${w("p")}`,s:`O Copom ${b.s>a.s?"elevou":b.s<a.s?"reduziu":"manteve"} a Selic diante de expectativas de ${fmt(b.e,1)}% e de um prêmio de risco ${b.pm>a.pm?"em alta":"estável ou em queda"}.`,u:`Atividade ${b.g>2.5?"aquecida":b.g<1.5?"fraca":"moderada"} (PIB de ${fmt(b.g,1)}%) e crédito caro definem o ritmo das contratações.`,c:`Prêmio de risco ${b.pm>a.pm+.02?"em alta":b.pm<a.pm-.02?"em queda":"estável"} e juros ${b.s>10?"altos":"moderados"} no Brasil orientam o fluxo de capitais.`,d:`Primário de ${fmt(b.p)}% do PIB e juros sobre ${fmt(b.d,1)}% de dívida ${b.p<0?"pressionam":"aliviam"} a trajetória.`,p:`Despesa em ${fmt(S.gasto,1)}% e carga tributária em ${fmt(S.carga,1)}% do PIB.${w("prim")}`,a:`IPCA de ${fmt(b.i,1)}% e desemprego de ${fmt(b.u,1)}% moldam o humor da população.${w("pop")}`,cds:`O mercado precifica dívida de ${fmt(b.d,1)}% do PIB e primário de ${fmt(b.p)}%.`,ib:`A bolsa reage aos juros futuros (DI a ${fmt(DI())}%) e ao risco fiscal.`};
+ const C=[["g","PIB anualizado",1,"%",1],["i","IPCA 12 meses",1,"%",0],["s","Selic",2,"%",-1],["u","Desemprego",1,"%",-1],["c","Dólar",2,"",-1],["d","Dívida / PIB",1,"%",-1],["p","Resultado primário",2,"% PIB",1],["a","Aprovação",0,"%",1],["cds","CDS 5 anos",0," pb",-1],["ib","Ibovespa",0,"",1]];
+ const cards=C.map((c,n)=>{const k=c[0],dv=b[k]-a[k],im=c[4]===0?Math.abs(a[k]-3)-Math.abs(b[k]-3):dv*c[4],cl_=im>.001?"g":im<-.001?"b":"z";
+  return `<div class="rc" style="--i:${n}"><div class="rl">${c[1]}</div><div class="rn"><span class="cu" data-a="${a[k]}" data-b="${b[k]}" data-d="${c[2]}" data-s="${c[3]}">${fmt(a[k],c[2])}${c[3]}</span><small class="rd ${cl_}">${dv>0?"▲":dv<0?"▼":"■"} ${dv>0?"+":dv<0?"−":""}${fmt(Math.abs(dv),c[2])}</small></div><div class="rw">${W[k]}</div></div>`}).join("");
+ const hl=(S.news[0]?S.news[0].l:[]).slice(0,5).map(x=>{x=Array.isArray(x)?x:["",x];return `<div class="rh"><b>${x[0]}</b>${x[1]}</div>`}).join("");
+ rp.innerHTML=`<h3>Fechamento do mês · ${$("date").textContent}</h3><h2>Nota parcial ${b.sc} (${b.sc>=a.sc?"+":"−"}${Math.abs(b.sc-a.sc)})</h2><div class="rg">${cards}</div><div class="hd">Manchetes e reação do mercado</div>${hl}<div class="ft"><button class="p" id="rpx">Continuar</button></div>`;rp.hidden=false;rp.scrollTop=0;
+ const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/900),e=1-Math.pow(1-k,3);rp.querySelectorAll(".cu").forEach(n=>{n.textContent=fmt(+n.dataset.a+(+n.dataset.b-+n.dataset.a)*e,+n.dataset.d)+n.dataset.s});if(k<1)requestAnimationFrame(f)})(t0);
+ $("rpx").onclick=()=>{rp.hidden=true;scrollTo(0,0);if(!S.over)agenda()}}
+const T3=turn;turn=function(){if(S.over||S.crise)return;const a=snap(),m0=S.m;T3();if(S.m!==m0){PV=snap();report(a,PV);try{logm(a,PV,m0)}catch(x){}tn(392,.3,.05);setTimeout(()=>tn(587,.4,.05),140)}};
+const NM=()=>S.nm?"ministro "+S.nm:"ministro";
+const AG=[
+{w:"Casa Civil",t:"Reunião com o presidente",d:"O presidente pergunta por que o crescimento não aparece nas pesquisas e pede um anúncio até o fim do mês.",o:[["Defender a disciplina fiscal",()=>{A("pres",-4,0,100);P(-.03);return"Ele ouve em silêncio e encerra a reunião. O mercado registra o recado de firmeza."}],["Propor um pacote de investimento",()=>{mo({g:.15,prim:-.12},1,8,"Pacote de investimento");A("pres",4,0,100);return"O presidente aprova. A equipe técnica já reclama do custo."}],["Prometer números melhores",()=>{A("pres",2,0,100);A("cp",-4,0,100);return"Você ganha tempo, mas agora precisa entregar."}]]},
+{w:"Senado",t:"Sabatina na Comissão de Assuntos Econômicos",d:"Senadores cobram meta de superávit e criticam a carga tributária.",o:[["Apresentar dados e cronograma",()=>{A("cp",6,0,100);return"A sabatina rende elogios da relatoria e boa repercussão técnica."}],["Responder em tom político",()=>{O(1);A("cp",2,0,100);return"As manchetes são favoráveis, mas analistas notam a falta de números."}],["Evitar compromissos",()=>{A("cp",-5,0,100);P(.02);return"A oposição explora a esquiva e o mercado estranha."}]]},
+{w:"Mercado",t:"Almoço com gestores de fundos",d:"Os gestores querem saber se a regra fiscal será cumprida e como você pretende estabilizar a dívida.",o:[["Sinalizar corte de despesas",()=>{P(-.04);O(-1);return"Os gestores gostam do tom. Ministros de outras pastas, nem tanto."}],["Defender estímulo ao crescimento",()=>{P(.03);O(1);return"A mesa lê o discurso como flexibilização fiscal."}],["Ouvir e não se comprometer",()=>{return"O almoço termina sem notícias. A mesa segue desconfiada."}]]},
+{w:"Banco Central",t:"Reunião com a presidente do BC",d:"A diretoria do BC avalia que as expectativas de inflação ainda estão desancoradas.",o:[["Respeitar a autonomia do BC",()=>{P(-.02);return"A reunião reforça a credibilidade do arcabouço de metas."}],["Pedir cautela na alta dos juros",()=>{P(.03);S.exp+=.1;return"O pedido vaza. O mercado teme interferência política."}],["Pedir sinalização mais clara",()=>{S.exp-=.05;return"O BC melhora a comunicação sobre os próximos passos."}]]},
+{w:"Governadores",t:"Reunião com governadores",d:"Estados pedem socorro fiscal e mais repasses para saúde e segurança.",o:[["Prometer repasses",()=>{mo({prim:-.15},0,6,"Repasses a estados");PARTIES.forEach((p,j)=>S.rel[j]=cl(S.rel[j]+2,0,100));return"Os governadores saem satisfeitos e a base no Congresso agradece."}],["Condicionar a ajuste fiscal",()=>{PARTIES.forEach((p,j)=>S.rel[j]=cl(S.rel[j]-2,0,100));P(-.02);return"A reunião é tensa, mas o Tesouro aprova a postura."}],["Adiar a conversa",()=>{A("cp",-3,0,100);return"Os governadores reclamam publicamente do adiamento."}]]},
+{w:"Imprensa",t:"Entrevista ao principal telejornal",d:"O apresentador pergunta se o governo vai cumprir a meta fiscal e se haverá aumento de impostos.",o:[["Garantir a meta fiscal",()=>{P(-.02);A("cp",-3,0,100);return"A frase vira manchete. Agora ela passa a ser cobrada."}],["Descartar aumento de impostos",()=>{O(1);P(.02);return"A população aprova. Analistas perguntam como a conta fechará."}],["Responder com cautela técnica",()=>{return"A entrevista passa sem sustos e sem manchetes."}]]},
+{w:"Indústria",t:"Encontro com a indústria e o comércio",d:"Empresários pedem desoneração e juros menores para voltar a investir.",o:[["Prometer estudar desonerações",()=>{mo({g:.1},1,6,"Expectativa de desoneração");P(.02);return"O setor comemora. A equipe do Tesouro franze a testa."}],["Defender o ajuste fiscal",()=>{O(-1);P(-.02);return"A plateia fica fria, mas o mercado financeiro agradece."}]]},
+{w:"G20 e FMI",t:"Reunião do G20 e do FMI em Washington",d:"Investidores internacionais avaliam o Brasil e querem detalhes do plano fiscal.",o:[["Apresentar plano fiscal gradual",()=>{P(-.04);return"Os investidores estrangeiros reagem bem à agenda."}],["Priorizar crescimento e inclusão",()=>{O(1);P(.03);return"O discurso agrada em casa, mas inquieta analistas estrangeiros."}]]},
+{w:"Tesouro",t:"Leilão de títulos com baixa demanda",d:"Investidores pedem taxas mais altas para comprar títulos longos.",o:[["Aceitar juros mais altos",()=>{P(.02);return"O leilão fecha, mas o custo da dívida sobe."}],["Cancelar parte da oferta",()=>{A("cp",-2,0,100);return"O Tesouro evita o prejuízo, e o mercado vê fragilidade."}],["Reforçar o sinal fiscal",()=>{P(-.03);O(-1);return"O mercado reage bem à promessa de corte de gastos."}]]},
+{w:"Congresso",t:"Café com líderes da base aliada",d:"Líderes cobram liberação de emendas e espaço no governo.",o:[["Liberar emendas",()=>{mo({prim:-.1},0,3,"Emendas");PARTIES.forEach((p,j)=>S.rel[j]=cl(S.rel[j]+3,0,100));return"A base promete apoiar suas pautas. A conta chega ao Tesouro."}],["Pedir fidelidade sem contrapartida",()=>{PARTIES.forEach((p,j)=>S.rel[j]=cl(S.rel[j]-2,0,100));A("cp",2,0,100);return"Os líderes fecham a cara e o clima esfria."}]]},
+{w:"AGU",t:"Alerta jurídico sobre decisão do Supremo",d:"A AGU avisa que uma decisão pode abrir uma conta extra no orçamento deste ano.",o:[["Recorrer e buscar prazo",()=>{A("cp",-2,0,100);return"A estratégia ganha tempo. O mercado acompanha de perto."}],["Reservar recursos no orçamento",()=>{mo({prim:-.08},0,6,"Provisão judicial");P(-.01);return"O Tesouro aprova a prudência, mas o espaço fiscal diminui."}]]}];
+const desp=()=>{const pr=prim();return[["Tesouro · Marcos Valadares",pr<-.3?`Ministro, o primário projetado está em ${fmt(pr)}% do PIB. Sem medida de receita ou corte, o rating ficará pressionado.`:`O primário está em ${fmt(pr)}% do PIB. Há espaço limitado para novas despesas.`],["Banco Central · Helena Brandão",S.exp>4.5?`As expectativas estão em ${fmt(S.exp,1)}%. Sem sinal fiscal claro, será difícil cortar juros.`:`Expectativas de ${fmt(S.exp,1)}% dão conforto ao Copom, mas o câmbio exige atenção.`],["Casa Civil · Ricardo Pinheiro",S.pop<40?`A aprovação caiu para ${Math.round(S.pop)}%. O presidente quer ver resultados no bolso da população.`:S.cp<25?"Seu capital político no Congresso está baixo. Convém negociar antes de enviar novos projetos.":`O governo tem ${Math.round(S.cp)} pontos de capital político. Há janela para uma pauta no Congresso.`]]};
+let AQ=[];const ag=document.createElement("div");ag.id="ag";ag.hidden=true;document.body.appendChild(ag);
+function agenda(){const n=S.m<1?1:R()<.4?2:1,pl=AG.map((x,i)=>i).filter(i=>i!==S.la);AQ=[];while(AQ.length<n)AQ.push(pl.splice(Math.floor(R()*pl.length),1)[0]);S.la=AQ[0];showAg(true)}
+function showAg(h){const i=AQ[0];if(i===undefined){ag.hidden=true;return}const e=AG[i];ag.hidden=false;ag.innerHTML=`<div class="bx"><h3>Agenda do ministro · ${$("date").textContent}</h3>${h?`<h2>Bom dia, ${NM()}.</h2>${desp().map(x=>`<div class="rh"><b>${x[0]}</b>${x[1]}</div>`).join("")}`:""}<div class="hd">${e.w}</div><h2>${e.t}</h2><p>${e.d}</p>${e.o.map((o,k)=>`<button class="${k?"s":"p"}" data-k="${k}">${o[0]}</button>`).join("")}</div>`}
+ag.onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.k!==undefined){const ev=AG[AQ[0]],o=ev.o[+b.dataset.k],r=o[1]();S.pend.push(`${ev.t}: ${o[0]}.`);save();AQ.shift();ag.querySelector(".bx").innerHTML=`<h3>${ev.t}</h3><h2>Resultado</h2><p>${r}</p><button class="p" data-n="1">${AQ.length?"Próximo compromisso":"Iniciar o mês"}</button>`;render();return}if(b.dataset.n)showAg(false)};
+let ac;const tn=(f,d=.06,v=.03)=>{if(S.snd===0)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=v;o.connect(g);g.connect(ac.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+d);o.stop(ac.currentTime+d)}catch(x){}};
+document.addEventListener("click",e=>{if(e.target.closest("button"))tn(520,.05)});
+const sb=document.createElement("button");sb.className="s";sb.style.cssText="padding:6px 10px;font-size:12px";const sbt=()=>sb.textContent=S.snd===0?"Som: off":"Som: on";sbt();sb.onclick=()=>{S.snd=S.snd===0?1:0;sbt();save()};$("rs").after(sb);
+let PV=snap();const tk=document.createElement("div");tk.id="tk";document.querySelector("header").after(tk);
+function tick(){try{czr()}catch(x){}const b=snap(),it=[["IBOV",b.ib,PV.ib,0],["USD/BRL",b.c,PV.c,2],["SELIC",b.s,PV.s,2],["CDS 5A",b.cds,PV.cds,0],["IPCA 12M",b.i,PV.i,1]],h=it.map(x=>{const d=x[1]-x[2];return `<span>${x[0]} <b>${fmt(x[1],x[3])}</b> <i style="color:${d>0?"#6fae8a":d<0?"#d0675d":"#8e988f"}">${d>0?"▲":d<0?"▼":"■"}</i></span>`}).join("");tk.innerHTML=`<div>${h}${h}${h}${h}</div>`}
+const R2=render;render=function(){R2();tick()};
+let st=0;
+intro=function(){if(S.intro||S.m>0){iv.hidden=true;return}iv.hidden=false;const k=(l,v)=>`<div class="k"><span>${l}</span><b>${v}</b></div>`,P_=(t,i)=>`<p class="fd" style="--i:${i}">${t}</p>`,B=(t)=>`<button class="p" data-n="1">${t}</button>`;
+ const T=[`<h3>Brasília · 3 de novembro de 2026</h3><h2>Palácio do Planalto</h2>${P_("O salão está cheio. Câmeras, ministros, parlamentares e banqueiros acompanham a cerimônia.",0)}${P_("Você acaba de ser nomeado Ministro da Fazenda e assume a economia de um país de 215 milhões de pessoas.",1)}${B("Continuar")}`,
+ `<h3>Gabinete presidencial</h3><h2>“O país precisa de estabilidade”</h2>${P_("O presidente chama você para uma conversa reservada. A inflação ainda incomoda, o mercado desconfia da dívida e o Congresso não vai facilitar.",0)}${P_("“Você tem 24 meses. Cada decisão será cobrada pelo mercado, pela imprensa e pelas urnas.”",1)}${B("Continuar")}`,
+ `<h3>Pasta do ministro</h3><h2>Situação recebida</h2><div class="grid fd" style="--i:0">${k("Selic",fmt(S.selic)+"%")}${k("IPCA 12 meses",fmt(ipca12(),1)+"%")}${k("Dívida / PIB",fmt(S.div,1)+"%")}${k("Desemprego",fmt(S.u,1)+"%")}${k("Dólar","R$ "+fmt(S.cambio))}${k("Aprovação",Math.round(S.pop)+"%")}</div>${P_("Meta de inflação de 3%, com tolerância de 1,5 ponto. Primário próximo de zero. Você precisa equilibrar contas, juros, emprego e a base no Congresso.",1)}${B("Continuar")}`,
+ `<h3>Posse</h3><h2>Como devemos chamá-lo?</h2><input id="nm" maxlength="24" placeholder="Seu nome"><p class="mut">Escolha a dificuldade para assumir o cargo:</p><button class="s" data-d="0.6">Fácil · poucas crises</button><button class="p" data-d="1">Normal</button><button class="s" data-d="1.7">Difícil · crises frequentes</button>`];
+ iv.innerHTML=`<div class="bx">${T[Math.min(st,3)]}</div>`};
+iv.onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.n){st++;intro();return}S.dif=+b.dataset.d;S.nm=($("nm").value||"").trim().slice(0,24);$("dif").value=S.dif;S.intro=1;save();iv.hidden=true;tn(392,.3,.05);agenda()};
+intro();
+const d=$("dif");d.value=S.dif;d.onchange=()=>{S.dif=+d.value;save()};
+const rs=$("rs");let rc=0;rs.onclick=()=>{if(!rc){rc=1;rs.textContent="Tem certeza? Toque de novo";setTimeout(()=>{rc=0;rs.textContent="↻ Novo mandato"},3000);return}try{localStorage.removeItem("mme2")}catch(x){}location.reload()};
+render();
+})();
+
+const cz=document.createElement("div");cz.className="card";cz.id="cz";$("t0").appendChild(cz);
+function logm(a,b,m0){const e={m:m0,l:[]},dd=b.d-a.d,j=a.d*S.selic/1200,c=-a.d*(S.g+b.i)/1200,p=-b.p/12,res=dd-(j+c+p),nom=b.p-b.d*S.selic/100;
+ e.l.push(["Dívida",`${dd>=0?"+":""}${fmt(dd,2)} pp do PIB = juros ${fmt(j,2)} + crescimento nominal ${fmt(c,2)} + primário ${fmt(p,2)} + ajustes ${fmt(res,2)} (aprox.). Resultado nominal ≈ ${fmt(nom,1)}% do PIB ao ano.`]);
+ const dk=[["IPCA 12m","p",b.i-a.i],["PIB","g",b.g-a.g],["Primário","prim",b.p-a.p],["Prêmio de risco","prem",b.pm-a.pm]];
+ dk.forEach(x=>{if(Math.abs(x[2])>.03){let d="";try{d=drv(x[1])||""}catch(q){}e.l.push([x[0],`${x[2]>0?"+":""}${fmt(x[2],2)}.${d?" Medidas em vigor: "+d+".":" Sem medida aprovada relevante; efeito de câmbio, expectativas, juros e eventos."}`])}});
+ if(m0%2===1){const ch=b.s-a.s,dis=Math.min(4,Math.round(R()*2+(Math.abs(ch)>=.5?1:0)));e.l.push(["Copom (simulado)",`${ch>0?"Alta":ch<0?"Corte":"Manutenção"} da Selic${ch?" de "+fmt(Math.abs(ch))+" p.p.":""}, para ${fmt(b.s)}%. Votos ${9-dis} a ${dis} na diretoria de 9 membros. Decisão automática pelas expectativas, inflação e prêmio de risco; o governo não controla a taxa.`])}
+ S.cz=[e,...(S.cz||[])].slice(0,12)}
+function czr(){const z=(S.cz||[]).slice(0,2),mm=m=>M[(m+10)%12]+"/"+(2026+Math.floor((m+10)/12));cz.innerHTML="<h2>Por que mudou? Diário de causas</h2>"+(z.length?z.map(e=>`<div class="hd">${mm(e.m)}</div>`+e.l.map(n=>`<div class="nw"><span class="tag">${n[0]}</span>${n[1]}</div>`).join("")).join(""):'<div class="mut">Feche o primeiro mês para ver a explicação de cada variação.</div>')}
+</script></body></html>
